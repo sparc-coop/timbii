@@ -13,6 +13,23 @@
         </select>
 
         <input type="text" @bind="@Avatar.Presence.StatusMsg" @onblur="SavePresenceMsg" placeholder="Status message..." />
+
+        <p>
+            Last active:
+            @if (Avatar.Presence.CurrentlyActive && Avatar.Presence.Presence == "online")
+            {
+                <span>online</span>
+            }
+            else if (Avatar.Presence.LastActiveAgo.HasValue)
+            {
+                <span>@($"{Avatar.Presence.LastActiveAgo.Value / 60000} minutes ago")</span>
+            }
+            else
+            {
+                <span>never</span>
+            }
+        </p>
+
     }
 </div>
 
@@ -26,7 +43,7 @@
         if (Avatar.Presence != null)
         {
             var presence = await Chats.GetPresenceAsync(Avatar.Id);
-        }        
+        }
     }
 
     protected override void OnParametersSet()
@@ -37,7 +54,7 @@
             {
                 Presence = "offline",
                 StatusMsg = null,
-                LastActiveAgo = null
+                LastActiveAt = null
             };
         }
     }
@@ -54,6 +71,9 @@
             return;
 
         Avatar.Presence.Presence = status;
+
+        Avatar.Presence.ApplyToAvatar(Avatar, isProactiveEvent: true);
+
         await Aura.UpdateUserInfo(Avatar);
         await Chats.SetPresenceAsync(Avatar.Id, Avatar.Presence);
     }
