@@ -6,7 +6,7 @@
 
 <main>
     <div class="message-list">
-        @foreach (var msg in messages)
+        @foreach (var msg in Messages)
         {
             <div class="message-container @(IsUserMessage(msg.Sender) ? "my-message" : "")">
                 <MessageCard Message=@msg IsMine=IsUserMessage(msg.Sender) />
@@ -23,7 +23,7 @@
     [Parameter] public required string RoomId { get; set; }
 
     BlossomUser? User { get; set; }
-    private List<MatrixEvent<MatrixMessage>> messages = [];
+    private List<MatrixEvent<MatrixMessage>> Messages = [];
     private MatrixRoom? Room { get; set; }
 
     bool voiceMode = false;
@@ -43,9 +43,17 @@
         }
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (Messages.Count > 0)
+        {
+            await Js.InvokeVoidAsync("scrollToLastMessage");
+        }
+    }
+
     private async Task GetMessagesAsync()
     {
-        messages = await Chats.GetMessagesAsync(Room!.RoomId);
+        Messages = await Chats.GetMessagesAsync(Room!.RoomId);
     }
 
     private async Task SendMessage(string messageText)
