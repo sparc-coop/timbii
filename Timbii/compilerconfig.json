@@ -86,5 +86,9 @@
   {
     "outputFile": "Rooms/Chat.razor.css",
     "inputFile": "Rooms/Chat.razor.scss"
+  },
+  {
+    "outputFile": "Rooms/Presence.razor.css",
+    "inputFile": "Rooms/Presence.razor.scss"
   }
 ]
