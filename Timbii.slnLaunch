@@ -9,7 +9,7 @@
       },
       {
         "Path": "..\\blossom\\Sparc.Blossom.Engine\\Sparc.Blossom.Engine.csproj",
-        "Action": "StartWithoutDebugging",
+        "Action": "Start",
         "DebugTarget": "https"
       }
     ]
