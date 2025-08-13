@@ -24,7 +24,7 @@
 
     BlossomUser? User { get; set; }
     private List<MatrixEvent<MatrixMessage>> messages = [];
-    private MatrixRoom? Room { get; set; }
+    private MatrixRoomSummary? Room { get; set; }
 
     bool voiceMode = false;
     bool messageSent = false;

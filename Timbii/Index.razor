@@ -67,7 +67,7 @@
 @inject NavigationManager Nav
 @code {
     private string? RoomId { get; set; }
-    private List<MatrixRoom> Rooms = [];
+    private List<MatrixRoomSummary> Rooms = [];
 
     protected async override Task OnInitializedAsync()
     {
@@ -80,7 +80,7 @@
         Rooms = response.Chunk;
     }
 
-    private void GoToRoom(MatrixRoom room)
+    private void GoToRoom(MatrixRoomSummary room)
     {
         Nav.NavigateTo("/chats/" + room.LocalId);
     }
@@ -90,14 +90,14 @@
         Nav.NavigateTo("/chats/new");
     }
 
-    private async Task JoinRoom(MatrixRoom room)
+    private async Task JoinRoom(MatrixRoomSummary room)
     {
         await Chats.JoinRoomAsync(room.RoomId);
         await GetAllRooms();
         StateHasChanged();
     }
 
-    private async Task LeaveRoom(MatrixRoom room)
+    private async Task LeaveRoom(MatrixRoomSummary room)
     {
         await Chats.LeaveRoomAsync(room.RoomId);
         await GetAllRooms();
@@ -110,7 +110,7 @@
         }
     }
 
-    private async Task DeleteRoom(MatrixRoom room)
+    private async Task DeleteRoom(MatrixRoomSummary room)
     {
         var deletedRoom = await Chats.DeleteRoomAsync(room.RoomId);
         await GetAllRooms();
@@ -123,7 +123,7 @@
         Nav.Refresh(true);
     }
 
-    private bool UserIsInRoom(MatrixRoom room)
+    private bool UserIsInRoom(MatrixRoomSummary room)
     {
         return true;
     }

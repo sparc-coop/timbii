@@ -17,7 +17,7 @@
 
 @code {
     [Parameter] public BlossomUser? User {get; set;}
-    [Parameter] public required MatrixRoom Room { get; set; }
+    [Parameter] public required MatrixRoomSummary Room { get; set; }
 
     List<MatrixEvent<MatrixMessage>> Messages = [];
     string? MessagePreview = "";

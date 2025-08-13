@@ -56,7 +56,7 @@
 
 @code {
     [Parameter] public required string Page { get; set; }
-    [Parameter] public MatrixRoom? Room { get; set; }
+    [Parameter] public MatrixRoomSummary? Room { get; set; }
     [Parameter] public EventCallback<bool> OnToggleVoiceMode { get; set; }
     bool voiceMode = false;
 
