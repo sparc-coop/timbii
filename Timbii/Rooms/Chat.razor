@@ -23,8 +23,11 @@
     [Parameter] public required string RoomId { get; set; }
 
     BlossomUser? User { get; set; }
-    private List<MatrixEvent<MatrixMessage>> messages = [];
-    private MatrixRoomSummary? Room { get; set; }
+    List<MatrixEvent<MatrixMessage>> messages = [];
+    MatrixRoomSummary? Room { get; set; }
+    string? Since;
+
+    PeriodicTimer? EverySecondPoller;
 
     bool voiceMode = false;
     bool messageSent = false;
@@ -39,13 +42,14 @@
         if (!string.IsNullOrWhiteSpace(RoomId))
         {
             Room = await Chats.GetRoomSummaryAsync(RoomId);
-            await GetMessagesAsync();
+            await SyncAsync();
         }
     }
 
-    private async Task GetMessagesAsync()
+    private async Task SyncAsync()
     {
-        messages = await Chats.GetMessagesAsync(Room!.RoomId);
+        var sync = await Chats.SyncAsync(Since);
+        messages.AddRange(sync.Rooms.Join[RoomId].Timeline.Events.OfType<MatrixEvent<MatrixMessage>>());
     }
 
     private async Task SendMessage(string messageText)
@@ -56,7 +60,7 @@
             await Chats.SendMessageAsync(Room!.RoomId, "m.room.message", txnId, new(messageText));
 
             // currentMessage = "";
-            await GetMessagesAsync();
+            await SyncAsync();
             messageSent = true;
         }
     }

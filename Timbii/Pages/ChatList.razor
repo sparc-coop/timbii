@@ -40,7 +40,7 @@
 
     private async Task GetAllRooms()
     {
-        var response = await Chats.GetRoomsAsync();
+        var response = await Chats.GetPublicRoomsAsync();
         Rooms = response.Chunk;
     }
 
@@ -66,19 +66,12 @@
         await Chats.LeaveRoomAsync(room.RoomId);
         await GetAllRooms();
         StateHasChanged();
-        var response = await Chats.GetRoomsAsync();
+        var response = await Chats.GetPublicRoomsAsync();
         Rooms = response.Chunk;
         if (Rooms.Any())
         {
             RoomId = Rooms.First().RoomId;
         }
-    }
-
-    private async Task DeleteRoom(MatrixRoomSummary room)
-    {
-        var deletedRoom = await Chats.DeleteRoomAsync(room.RoomId);
-        await GetAllRooms();
-        StateHasChanged();
     }
 
     async Task Create()
