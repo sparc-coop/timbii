@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "Timbii with Blossom Engine",
+    "Projects": [
+      {
+        "Path": "Timbii\\Timbii.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "..\\blossom\\Sparc.Blossom.Engine\\Sparc.Blossom.Engine.csproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "https"
+      }
+    ]
+  }
+]

@@ -1,0 +1,55 @@
+﻿<div class="chat-card" @onclick='() => Nav.NavigateTo($"/chats/{Room.RoomId}")'>
+    <div class="left">
+        <div class="chat-img">
+        </div>
+        <div class="chat-info">
+            <h4>@(Room.Name ?? Room.RoomId.Substring(0, 8))</h4>
+            <p>@MessagePreview</p>
+        </div>
+    </div>
+    <div class="right">
+        <aside>@(Messages.Count > 0 ? DateTimeOffset.FromUnixTimeMilliseconds(Messages.Last().OriginServerTs).ToLocalTime().ToString("HH:mm") : "")</aside>
+        <div class="notification-bubble">
+            <span>1</span> @*number of unread messages*@
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public BlossomUser? User {get; set;}
+    [Parameter] public required MatrixRoom Room { get; set; }
+
+    List<MatrixEvent<MatrixMessage>> Messages = [];
+    string? MessagePreview = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Room != null)
+        {
+            await GetMessagesAsync();
+        }
+
+        if (Messages.Count > 0)
+        {
+            GetMessagePreview(Messages.LastOrDefault()?.Content.Body ?? string.Empty);
+        }
+    }
+
+    private async Task GetMessagesAsync()
+    {
+        Messages = await Chats.GetMessagesAsync(Room!.RoomId);
+    }
+
+    public void GetMessagePreview(string message)
+    {
+        int maxLength = 50;
+
+        if (message.Length <= maxLength)
+        {
+            MessagePreview = message;
+        } else
+        {
+            MessagePreview = message.Substring(0, maxLength) + "...";
+        }
+    }
+}

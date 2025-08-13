@@ -1,0 +1,73 @@
+﻿@if (Page == "Chats")
+{
+    <nav class="top-bar chats-page">
+        <div class="left">
+            <h2>Chats</h2>
+        </div>
+        <div class="right">
+            <button class="add-btn icon-btn" @onclick="GoToCreateRoom"><MessageAddIcon /></button>
+            <button class="search-btn icon-btn"><SearchIcon /></button>
+            <SparcAura>
+                <Presence Avatar="context" />
+            </SparcAura>
+        </div>
+    </nav>
+}
+
+@if (Page == "Chat")
+{
+    <nav class="top-bar chat-page">
+        <div class="left">
+            <button class="back-btn icon-btn" @onclick='() => Nav.NavigateTo("/chats")'><ArrowLeftIcon Color="#7A7A7A" /></button>
+            <div class="user-card">
+                <div class="user-img">
+                </div>
+                <div class="user-info">
+                    <h4>@(Room != null ? (Room.Name ?? Room.RoomId.Substring(0, 16)) : "")</h4>
+                    <aside>@(Room != null ? Room.Topic : "")</aside>
+                </div>
+            </div>
+        </div>
+        <div class="right chat-actions">
+            <button class="voice-btn icon-btn" @onclick=ToggleVoiceMode><VoiceModeIcon VoiceMode=voiceMode /></button>
+            <SparcAura>
+                <Presence Avatar="context" />
+            </SparcAura>
+            <button class="more-btn icon-btn"><MenuIcon /></button>
+        </div>
+    </nav>
+}
+
+@if (Page == "New Chat")
+{
+    <nav class="top-bar new-chat">
+        <div class="left">
+            <button class="back-btn icon-btn" @onclick='() => Nav.NavigateTo("/chats")'><ArrowLeftIcon Color="#7A7A7A" /></button>
+            <h2>Start New Chat</h2>
+        </div>
+        <div class="right">
+            <button class="add-btn icon-btn"><UserAddIcon /></button>
+            <SparcAura>
+                <Presence Avatar="context" />
+            </SparcAura>
+        </div>
+    </nav>
+}
+
+@code {
+    [Parameter] public required string Page { get; set; }
+    [Parameter] public MatrixRoom? Room { get; set; }
+    [Parameter] public EventCallback<bool> OnToggleVoiceMode { get; set; }
+    bool voiceMode = false;
+
+    void ToggleVoiceMode()
+    {
+        voiceMode = !voiceMode;
+        OnToggleVoiceMode.InvokeAsync(voiceMode);
+    }
+
+    private void GoToCreateRoom()
+    {
+        Nav.NavigateTo("/chats/new");
+    }
+}

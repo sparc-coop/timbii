@@ -1,0 +1,30 @@
+﻿@page "/chats/new"
+
+<PageTitle>New Chat</PageTitle>
+
+<div>
+    <h3>Start a new chat</h3>
+    <div>
+        <label>Chat Name</label>
+        <input type="text" @bind="roomName" placeholder="Select a chat name" />
+    </div>
+    <div>
+        <button class="btn btn-sm btn-primary" @onclick="CreateNewRoom">Create</button>
+    </div>
+    
+</div>
+
+
+@code {
+    string roomName = "";
+
+    private async Task CreateNewRoom()
+    {
+        // var room = new Room(roomName);
+        var room = new CreateRoomRequest(roomName, "public");
+        var newRoom = await Chats.CreateRoomAsync(room);
+
+        Nav.NavigateTo("/");
+    }
+
+}
