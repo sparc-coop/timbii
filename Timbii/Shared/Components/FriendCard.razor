@@ -9,14 +9,20 @@
             </div>
         </div>
         <div class="right">
-            @if (IsSelected)
+            @if (List == "all")
+            {
+                <button class="icon-btn select-btn @(IsSelected ? "selected" : "")" @onclick=ToggleFriend>
+                    @if(IsSelected)
+                    {
+                        <CheckIcon1 />
+                    } else
+                    {
+                        <span></span>
+                    }
+                </button>
+            } else if (List == "selected")
             {
                 <button class="icon-btn deselect-btn" @onclick=ToggleFriend><CloseIcon /></button>
-            } else
-            {
-                <div class="checkbox-container">
-                    <input type="checkbox" @onclick=ToggleFriend checked=@IsSelected />
-                </div>
             }
         </div>
     </div>
@@ -39,7 +45,8 @@
 @code {
     [Parameter] public string Friend { get; set; }
     [Parameter] public string Page { get; set; }
-    [Parameter] public bool IsSelected { get; set; } = false;
+    [Parameter] public bool IsSelected { get; set; }
+    [Parameter] public string List { get; set; }
     [Parameter] public EventCallback<string> OnSelect { get; set; }
     [Parameter] public EventCallback<string> OnDeselect { get; set; }
 

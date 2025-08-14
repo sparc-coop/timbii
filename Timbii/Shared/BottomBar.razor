@@ -1,15 +1,25 @@
-﻿<footer class="bottom-bar">
-    <NavLink class="nav-link friends-btn" href="/friends" ActiveClass="active" Match="NavLinkMatch.All">
-        <FriendsIcon Color="var(--egg-50)" />
-        <span>Friends</span>
-    </NavLink>
+﻿<footer class="bottom-bar @(Page == "New Chat" ? "new-chat" : "")">
+    @if (Page == "New Chat")
+    {
+        <button class="primary-btn create-btn">Create Chat</button>
+    } else
+    {
+        <NavLink class="nav-link friends-btn" href="/friends" ActiveClass="active" Match="NavLinkMatch.All">
+            <FriendsIcon Color="var(--egg-50)" />
+            <span>Friends</span>
+        </NavLink>
 
-    <NavLink class="nav-link chats-btn" href="/chats" ActiveClass="active" Match="NavLinkMatch.Prefix">
-        <ChatsIcon Color="var(--egg-50)" />
-        <span>Chats</span>
-    </NavLink>
-    <NavLink class="nav-link settings-btn" href="/settings" ActiveClass="active" Match="NavLinkMatch.All">
-        <MoreSettingsIcon Color="var(--egg-50)" />
-        <span>More</span>
-    </NavLink>
+        <NavLink class="nav-link chats-btn" href="/chats" ActiveClass="active" Match="NavLinkMatch.Prefix">
+            <ChatsIcon Color="var(--egg-50)" />
+            <span>Chats</span>
+        </NavLink>
+        <NavLink class="nav-link settings-btn" href="/settings" ActiveClass="active" Match="NavLinkMatch.All">
+            <MoreSettingsIcon Color="var(--egg-50)" />
+            <span>More</span>
+        </NavLink>
+    }
 </footer>
+
+@code {
+    [Parameter] public string Page { get; set; }
+}

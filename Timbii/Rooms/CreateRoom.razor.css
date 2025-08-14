@@ -3,7 +3,9 @@
   height: 100vh;
   padding: 16px;
   padding-top: 96px;
+  padding-bottom: 96px;
   background: var(--surface-secondary);
+  overflow-y: auto;
 }
 main .chats-search {
   display: flex;

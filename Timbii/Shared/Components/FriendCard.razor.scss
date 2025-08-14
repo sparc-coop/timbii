@@ -89,7 +89,7 @@
         }
 
         .right {
-            .checkbox-container {
+            .select-btn {
                 width: 32px;
                 height: 32px;
                 padding: 4px;
@@ -99,6 +99,14 @@
                 background: var(--surface-minimal);
                 border: none;
                 border-radius: 12px;
+
+                &.selected {
+                    background: var(--surface-brand);
+
+                    ::deep svg path {
+                        stroke: var(--icon-invert);
+                    }
+                }
             }
 
             .deselect-btn {

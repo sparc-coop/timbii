@@ -32,7 +32,7 @@
                 <ul>
                     @foreach (var friend in SelectedFriends)
                     {
-                        <li><FriendCard Friend=@friend Page="New Chat" IsSelected=true OnSelect=SelectFriend OnDeselect=DeselectFriend /></li>
+                        <li @key=friend><FriendCard Friend=@friend Page="New Chat" List="selected" IsSelected=true OnSelect=SelectFriend OnDeselect=DeselectFriend /></li>
                     }
                 </ul>
             </div>
@@ -45,13 +45,24 @@
             <ul>
                 @foreach (var friend in Friends)
                 {
-                    <li><FriendCard Friend=@friend Page="New Chat" IsSelected=false OnSelect=SelectFriend OnDeselect=DeselectFriend /></li>
+                    if (!SelectedFriends.Contains(friend))
+                    {
+                        <li @key=friend><FriendCard Friend=@friend Page="New Chat" List="all" IsSelected=false OnSelect=SelectFriend OnDeselect=DeselectFriend /></li>
+                    } else
+                    {
+                        <li @key=friend><FriendCard Friend=@friend Page="New Chat" List="all" IsSelected=true OnSelect=SelectFriend OnDeselect=DeselectFriend /></li>
+                    }
                 }
             </ul>
         </div>
     </article>
 
 </main>
+
+@if (SelectedFriends.Count > 0)
+{
+    <BottomBar Page="New Chat" />
+}
 
 @code {
     string roomName = "";
@@ -87,7 +98,6 @@
         } else
         {
             SelectedFriends.Add(friend);
-            Friends.Remove(friend);
         }
     }
 
@@ -96,8 +106,6 @@
         if (SelectedFriends.Contains(friend))
         {
             SelectedFriends.Remove(friend);
-            Friends.Add(friend);
-            Friends = Friends.OrderBy(f => f).ToList();
         }
     }
 
