@@ -58,3 +58,40 @@ main .friends-list header h3 {
 main .friends-list header span {
   color: var(--text-branded, #DB571F);
 }
+main .friends-list header .collapse-btn {
+  width: 32px;
+  height: 32px;
+  aspect-ratio: 1/1;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  transition: 0.2s ease-in-out;
+}
+main .friends-list header .collapse-btn ::deep svg {
+  width: 20px;
+  height: auto;
+}
+main .friends-list header .collapse-btn ::deep svg path {
+  stroke: var(--button-ghost-text-normal);
+}
+main .friends-list header ul {
+  max-height: fit-content;
+  transition: 1s ease-in-out;
+}
+main .friends-list .selected-friends, main .friends-list .all-friends {
+  max-height: fit-content;
+  width: 100%;
+}
+main .friends-list .selected-friends.collapsed, main .friends-list .all-friends.collapsed {
+  max-height: 44px;
+  overflow: hidden;
+  transition: max-height 1s ease-in-out;
+}
+main .friends-list .selected-friends.collapsed .collapse-btn, main .friends-list .all-friends.collapsed .collapse-btn {
+  transition: 0.5s ease-in-out;
+}
+main .friends-list .selected-friends.collapsed .collapse-btn ::deep svg, main .friends-list .all-friends.collapsed .collapse-btn ::deep svg {
+  transform: rotate(180deg);
+}

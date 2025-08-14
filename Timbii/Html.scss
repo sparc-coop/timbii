@@ -2,7 +2,7 @@
 
 html, body {
     font-size: 62.5%;
-    font-family: Halcom;
+    font-family: Halcom, Helvetica, sans-serif;
     margin: 0;
     position: relative;
     overflow-x: hidden;
@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, h6, h7 {
 p, ul, li {
     margin: 0;
     padding: 0;
-    font-family: Halcom;
+    font-family: Halcom, Helvetica, sans-serif;
 }
 
 button, input, select, textarea {
@@ -142,6 +142,10 @@ button {
         ::deep svg {
             width: 20px;
             height: 20px;
+
+            path {
+                stroke: var(--icon-primary);
+            }
         }
 
         &:hover {
@@ -197,9 +201,11 @@ button {
 ul {
     margin: 0;
     padding: 0;
+    list-style: none;
 
     li {
-        margin-left: 16px;
+        margin: 0;
+        padding: 0;
     }
 }
 

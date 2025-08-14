@@ -15,7 +15,7 @@
             } else
             {
                 <div class="checkbox-container">
-                    <input type="checkbox" @onclick=ToggleFriend />
+                    <input type="checkbox" @onclick=ToggleFriend checked=@IsSelected />
                 </div>
             }
         </div>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="right">
-            <button class="icon-btn deselect-btn"><CloseIcon /></button>
+            <button class="icon-btn deselect-btn" @onclick=ToggleFriend><CloseIcon /></button>
         </div>
     </div>
 }

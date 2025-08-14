@@ -13,6 +13,10 @@
     left: 0;
     z-index: 20;
 
+    h2 {
+        font-family: Halcom;
+    }
+
     ::deep {
         .account-btn {
             width: 32px;
@@ -22,14 +26,6 @@
             figure {
                 width: 100%;
                 height: 100%;
-            }
-        }
-    }
-
-    .right {
-        ::deep {
-            div:last-child {
-                display: none;
             }
         }
     }

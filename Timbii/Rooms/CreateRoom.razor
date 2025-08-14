@@ -24,26 +24,30 @@
     <article class="friends-list">
         @if (SelectedFriends.Count > 0)
         {
-            <div class="selected-friends">
+            <div class="selected-friends  @(collapseSelected ? "collapsed" : "")">
                 <header>
                     <h3>Selected Friends <span>@SelectedFriends.Count()</span></h3>
-                    <ChevronDownIcon />
+                    <button class="icon-btn collapse-btn" @onclick='() => ToggleList("selected")'><ChevronDownIcon /></button>
                 </header>
-                @foreach (var friend in SelectedFriends)
-                {
-                    <FriendCard Friend=@friend Page="New Chat" IsSelected=true OnSelect=SelectFriend OnDeselect=DeselectFriend />
-                }
+                <ul>
+                    @foreach (var friend in SelectedFriends)
+                    {
+                        <li><FriendCard Friend=@friend Page="New Chat" IsSelected=true OnSelect=SelectFriend OnDeselect=DeselectFriend /></li>
+                    }
+                </ul>
             </div>
         }
-        <div class="all-friends">
+        <div class="all-friends  @(collapseAll ? "collapsed" : "")">
             <header>
                 <h3>All Friends <span>@Friends.Count()</span></h3>
-                <ChevronDownIcon />
+                <button class="icon-btn collapse-btn" @onclick='() => ToggleList("all")'><ChevronDownIcon /></button>
             </header>
-            @foreach (var friend in Friends)
-            {
-                <FriendCard Friend=@friend Page="New Chat" IsSelected=false OnSelect=SelectFriend OnDeselect=DeselectFriend />
-            }
+            <ul>
+                @foreach (var friend in Friends)
+                {
+                    <li><FriendCard Friend=@friend Page="New Chat" IsSelected=false OnSelect=SelectFriend OnDeselect=DeselectFriend /></li>
+                }
+            </ul>
         </div>
     </article>
 
@@ -53,6 +57,8 @@
     string roomName = "";
     List<string> Friends = [];
     List<string> SelectedFriends = [];
+    bool collapseAll;
+    bool collapseSelected;
 
     protected override void OnInitialized()
     {
@@ -73,7 +79,7 @@
         Nav.NavigateTo("/");
     }
 
-    private void SelectFriend(string friend)
+    void SelectFriend(string friend)
     {
         if (SelectedFriends.Contains(friend))
         {
@@ -85,13 +91,24 @@
         }
     }
 
-    private void DeselectFriend(string friend)
+    void DeselectFriend(string friend)
     {
         if (SelectedFriends.Contains(friend))
         {
             SelectedFriends.Remove(friend);
             Friends.Add(friend);
             Friends = Friends.OrderBy(f => f).ToList();
+        }
+    }
+
+    void ToggleList(string list)
+    {
+        if (list == "all")
+        {
+            collapseAll = !collapseAll;
+        } else if (list == "selected")
+        {
+            collapseSelected = !collapseSelected;
         }
     }
 }
