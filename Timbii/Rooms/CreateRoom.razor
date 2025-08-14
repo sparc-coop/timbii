@@ -1,23 +1,68 @@
 ﻿@page "/chats/new"
+@layout AppLayout
 
 <PageTitle>New Chat</PageTitle>
 
 <TopBar Page="New Chat" />
-<main>
-    <h3>Start a new chat</h3>
-    <div>
-        <label>Chat Name</label>
-        <input type="text" @bind="roomName" placeholder="Select a chat name" />
-    </div>
-    <div>
-        <button class="btn btn-sm btn-primary" @onclick="CreateNewRoom">Create</button>
-    </div>
-</main>
 
-<BottomBar />
+<main>
+    <div class="chats-search">
+        <SearchIcon />
+        <input type="text" placeholder="Search" />
+    </div>
+
+    <form class="temporary-form create-room">
+        <div>
+            <label>Chat Name</label>
+            <input type="text" @bind="roomName" placeholder="Select a chat name" />
+        </div>
+        <div>
+            <button class="btn btn-sm btn-primary" @onclick="CreateNewRoom">Create</button>
+        </div>
+    </form>
+
+    <article class="friends-list">
+        @if (SelectedFriends.Count > 0)
+        {
+            <div class="selected-friends">
+                <header>
+                    <h3>Selected Friends <span>@SelectedFriends.Count()</span></h3>
+                    <ChevronDownIcon />
+                </header>
+                @foreach (var friend in SelectedFriends)
+                {
+                    <FriendCard Friend=@friend Page="New Chat" IsSelected=true OnSelect=SelectFriend OnDeselect=DeselectFriend />
+                }
+            </div>
+        }
+        <div class="all-friends">
+            <header>
+                <h3>All Friends <span>@Friends.Count()</span></h3>
+                <ChevronDownIcon />
+            </header>
+            @foreach (var friend in Friends)
+            {
+                <FriendCard Friend=@friend Page="New Chat" IsSelected=false OnSelect=SelectFriend OnDeselect=DeselectFriend />
+            }
+        </div>
+    </article>
+
+</main>
 
 @code {
     string roomName = "";
+    List<string> Friends = [];
+    List<string> SelectedFriends = [];
+
+    protected override void OnInitialized()
+    {
+        Friends.Add("Christine");
+        Friends.Add("Joseph");
+        Friends.Add("Laura");
+        Friends.Add("Fernando");
+
+        Friends = Friends.OrderBy(f => f).ToList();
+    }
 
     private async Task CreateNewRoom()
     {
@@ -28,4 +73,25 @@
         Nav.NavigateTo("/");
     }
 
+    private void SelectFriend(string friend)
+    {
+        if (SelectedFriends.Contains(friend))
+        {
+            return;
+        } else
+        {
+            SelectedFriends.Add(friend);
+            Friends.Remove(friend);
+        }
+    }
+
+    private void DeselectFriend(string friend)
+    {
+        if (SelectedFriends.Contains(friend))
+        {
+            SelectedFriends.Remove(friend);
+            Friends.Add(friend);
+            Friends = Friends.OrderBy(f => f).ToList();
+        }
+    }
 }
