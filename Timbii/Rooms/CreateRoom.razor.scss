@@ -116,11 +116,13 @@ main {
         .selected-friends {
             ul {
                 width: 100%;
+                max-width: 100%;
                 display: flex;
                 flex-direction: row;
                 justify-content: start;
                 align-items: center;
                 gap: 8px;
+                overflow: auto;
             }
         }
     }
