@@ -64,6 +64,10 @@
     "inputFile": "Shared/Components/ChatBar.razor.scss"
   },
   {
+    "outputFile": "Shared/Components/FriendCard.razor.css",
+    "inputFile": "Shared/Components/FriendCard.razor.scss"
+  },
+  {
     "outputFile": "Pages/Index.razor.css",
     "inputFile": "Pages/Index.razor.scss"
   },
@@ -80,11 +84,19 @@
     "inputFile": "Pages/Chat.razor.scss"
   },
   {
-    "outputFile": "Pages/ChatList.razor.css",
-    "inputFile": "Pages/ChatList.razor.scss"
+    "outputFile": "Rooms/ChatList.razor.css",
+    "inputFile": "Rooms/ChatList.razor.scss"
   },
   {
     "outputFile": "Rooms/Chat.razor.css",
     "inputFile": "Rooms/Chat.razor.scss"
+  },
+  {
+    "outputFile": "Rooms/CreateRoom.razor.css",
+    "inputFile": "Rooms/CreateRoom.razor.scss"
+  },
+  {
+    "outputFile": "Rooms/Presence.razor.css",
+    "inputFile": "Rooms/Presence.razor.scss"
   }
 ]

@@ -13,6 +13,10 @@
     left: 0;
     z-index: 20;
 
+    h2 {
+        font-family: Halcom;
+    }
+
     ::deep {
         .account-btn {
             width: 32px;
@@ -24,16 +28,12 @@
                 height: 100%;
             }
         }
-
-        div:last-child {
-            display: none;
-        }
     }
 
     &.chats-page {
-        height: 140px;
+        height: 80px;
         padding: 16px;
-        padding-top: 86px;
+        padding-top: 16px;
 
         .left {
             h2 {
@@ -101,7 +101,7 @@
                 flex-direction: column;
                 gap: 4px;
 
-                h4 {
+                h3 {
                     color: var(--button-text, #2C2920);
                     font-family: Halcom;
                     font-size: 1.4rem;
@@ -132,6 +132,27 @@
                 width: 20px;
                 height: 20px;
             }
+        }
+    }
+
+    &.new-chat {
+        height: 80px;
+        padding: 0 16px;
+
+        .left {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .right {
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+            align-items: center;
+            gap: 4px;
         }
     }
 }

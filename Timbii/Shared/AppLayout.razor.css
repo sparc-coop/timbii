@@ -4,3 +4,7 @@
   position: relative;
   background: var(--surface-secondary);
 }
+
+::deep .account-dialog {
+  position: fixed;
+}

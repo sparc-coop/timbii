@@ -154,7 +154,7 @@
 
 html, body {
   font-size: 62.5%;
-  font-family: Halcom;
+  font-family: Halcom, Helvetica, sans-serif;
   margin: 0;
   position: relative;
   overflow-x: hidden;
@@ -177,7 +177,7 @@ h1, h2, h3, h4, h5, h6, h7 {
 p, ul, li {
   margin: 0;
   padding: 0;
-  font-family: Halcom;
+  font-family: Halcom, Helvetica, sans-serif;
 }
 
 button, input, select, textarea {
@@ -288,6 +288,9 @@ button.icon-btn ::deep svg {
   width: 20px;
   height: 20px;
 }
+button.icon-btn ::deep svg path {
+  stroke: var(--icon-primary);
+}
 button.icon-btn:hover {
   box-shadow: 0px 10px 20px 0px rgba(0, 18, 65, 0.04), 0px 2px 6px 0px rgba(0, 18, 65, 0.04), 0px 0px 1px 0px rgba(0, 18, 65, 0.04);
 }
@@ -326,9 +329,11 @@ button.small-btn {
 ul {
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 ul li {
-  margin-left: 16px;
+  margin: 0;
+  padding: 0;
 }
 
 hr {

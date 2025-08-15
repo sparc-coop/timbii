@@ -1,4 +1,4 @@
-footer {
+.bottom-bar {
     //width: calc(100% - 64px);
     width: 100%;
     height: 64px;
@@ -43,6 +43,33 @@ footer {
             font-weight: 500;
             line-height: 120%; /* 14.4px */
             letter-spacing: -0.12px;
+        }
+    }
+
+    &.new-chat {
+        height: 96px;
+        padding: 16px;
+        border-radius: 32px 32px 0 0;
+        background: var(--surface-secondary, #F7F6EF);
+
+        .create-btn {
+            height: var(--button-height-large, 64px);
+            padding: 16px 24px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex: 1 0 0;
+            border-radius: var(--button-border-large, 20px);
+            background: var(--button-primary-normal, #DB571F);
+            color: var(--text-invert, #F7F6EF);
+            leading-trim: both;
+            text-edge: cap;
+            /* Body/Regular/Medium */
+            font-family: Halcom;
+            font-size: 1.6rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 120%; /* 19.2px */
         }
     }
 }

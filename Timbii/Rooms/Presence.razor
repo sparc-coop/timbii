@@ -22,6 +22,14 @@
 @code {
     [Parameter] public required BlossomAvatar Avatar { get; set; }
 
+    protected override async Task OnInitializedAsync()
+    {
+        if (Avatar.Presence != null)
+        {
+            var presence = await Chats.GetPresenceAsync(Avatar.Id);
+        }        
+    }
+
     protected override void OnParametersSet()
     {
         if (Avatar.Presence == null)

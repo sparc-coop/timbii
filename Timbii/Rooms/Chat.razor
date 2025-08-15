@@ -6,7 +6,7 @@
 
 <main>
     <div class="message-list">
-        @foreach (var msg in messages)
+        @foreach (var msg in Messages)
         {
             <div class="message-container @(IsUserMessage(msg.Sender) ? "my-message" : "")">
                 <MessageCard Message=@msg IsMine=IsUserMessage(msg.Sender) />
@@ -43,6 +43,14 @@
         {
             Room = await Chats.GetRoomSummaryAsync(RoomId);
             await SyncAsync();
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (Messages.Count > 0)
+        {
+            await Js.InvokeVoidAsync("scrollToLastMessage");
         }
     }
 
