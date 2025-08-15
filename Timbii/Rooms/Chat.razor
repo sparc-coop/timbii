@@ -8,8 +8,8 @@
     <div class="message-list">
         @foreach (var msg in Messages)
         {
-            <div class="message-container @(IsUserMessage(msg.Sender) ? "my-message" : "")">
-                <MessageCard Message=@msg IsMine=IsUserMessage(msg.Sender) />
+            <div class="message-container @(IsUserMessage(msg.User.Id) ? "my-message" : "")">
+                <MessageCard Message=@msg IsMine=IsUserMessage(msg.User.Id) />
             </div>
         }
     </div>
@@ -23,7 +23,7 @@
     [Parameter] public required string RoomId { get; set; }
 
     BlossomUser? User { get; set; }
-    List<MatrixEvent<MatrixMessage>> messages = [];
+    List<TextMessage> Messages = [];
     MatrixRoomSummary? Room { get; set; }
     string? Since;
 
@@ -57,7 +57,7 @@
     private async Task SyncAsync()
     {
         var sync = await Chats.SyncAsync(Since);
-        messages.AddRange(sync.Rooms.Join[RoomId].Timeline.Events.OfType<MatrixEvent<MatrixMessage>>());
+        Messages.AddRange(sync.Rooms.Join[RoomId].Timeline.Events.OfType<MatrixEvent<MatrixMessage>>());
     }
 
     private async Task SendMessage(string messageText)
