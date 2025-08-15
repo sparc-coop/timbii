@@ -72,7 +72,15 @@
 
         Avatar.Presence.Presence = status;
 
-        Avatar.Presence.ApplyToAvatar(Avatar, isProactiveEvent: true);
+        var presenceEvent = new MatrixPresenceUpdated
+        {
+            Presence = Avatar.Presence.Presence,
+            StatusMsg = Avatar.Presence.StatusMsg,
+            CurrentlyActive = Avatar.Presence.CurrentlyActive,
+            LastActiveAt = Avatar.Presence.LastActiveAt
+        };
+
+        Avatar.Update(new[] { presenceEvent });
 
         await Aura.UpdateUserInfo(Avatar);
         await Chats.SetPresenceAsync(Avatar.Id, Avatar.Presence);
