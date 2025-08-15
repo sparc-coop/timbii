@@ -1,16 +1,16 @@
 ﻿@if (Page == "New Chat")
 {
-    <div class="friend-card new-chat">
-        <div class="left">
-            <div class="profile-img"></div>
-            <div class="friend-info">
-                <h4>@Friend</h4>
-                <p>Short Status Message</p>
+    @if (List == "all")
+    {
+        <div class="friend-card new-chat">
+            <div class="left">
+                <div class="profile-img"></div>
+                <div class="friend-info">
+                    <h4>@Friend</h4>
+                    <p>Short Status Message</p>
+                </div>
             </div>
-        </div>
-        <div class="right">
-            @if (List == "all")
-            {
+            <div class="right">
                 <button class="icon-btn select-btn @(IsSelected ? "selected" : "")" @onclick=ToggleFriend>
                     @if(IsSelected)
                     {
@@ -20,12 +20,21 @@
                         <span></span>
                     }
                 </button>
-            } else if (List == "selected")
-            {
-                <button class="icon-btn deselect-btn" @onclick=ToggleFriend><CloseIcon /></button>
-            }
+                @* <button class="icon-btn deselect-btn" @onclick=ToggleFriend><CloseIcon /></button> *@
+            </div>
         </div>
-    </div>
+    } else if (List == "selected")
+    {
+        <div class="friend-card new-chat selected">
+            <div class="friend-avatar">
+                <div class="profile-img"></div>
+                <button class="icon-btn deselect-btn" @onclick=ToggleFriend>
+                    <XCircledIcon />
+                </button>
+            </div>
+            <h4>@(Friend.Length > 5 ? $"{Friend.Substring(0, 5)}..." : Friend)</h4>
+         </div>
+    }
 } else
 {
     <div class="friend-card">

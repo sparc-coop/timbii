@@ -9,19 +9,19 @@
     border: 0 solid #EEE;
     background: var(--menu-primary-normal, #F7F6EF);
 
+    .profile-img {
+        width: 48px;
+        height: 48px;
+        border-radius: 20px;
+        background: var(--surface-minimal);
+    }
+
     .left {
         display: flex;
         flex-direction: row;
         justify-content: start;
         align-items: center;
         gap: 16px;
-
-        .profile-img {
-            width: 48px;
-            height: 48px;
-            border-radius: 20px;
-            background: var(--surface-minimal);
-        }
 
         .friend-info {
             display: flex;
@@ -127,6 +127,40 @@
                     path {
                         stroke: var(--secondary-900);
                     }
+                }
+            }
+        }
+    }
+
+    &.selected {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+
+        .friend-avatar {
+            position: relative;
+
+            button {
+                width: 14px;
+                height: 14px;
+                aspect-ratio: 1/1;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 50%;
+                right: -6px;
+                transform: translateY(-50%);
+                border-radius: var(--button-border-small, 12px);
+                border: 1.5px solid var(--button-secondary, #4F4B40);
+                background: var(--surface-secondary, #F7F6EF);
+            }
+
+            ::deep svg {
+                path {
+                    stroke: var(--icon-primary, #FFFFFF);
                 }
             }
         }
