@@ -1,4 +1,8 @@
-﻿@if (Page == "Chats")
+﻿<nav class="top-bar @Page @Styles">
+    @ChildContent
+</nav>
+
+@if (Page == "Chats")
 {
     <nav class="top-bar chats-page">
         <div class="left">
@@ -55,7 +59,9 @@
 }
 
 @code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
     [Parameter] public required string Page { get; set; }
+    [Parameter] public string Styles { get; set; }
     [Parameter] public MatrixRoom? Room { get; set; }
     [Parameter] public EventCallback<bool> OnToggleVoiceMode { get; set; }
     bool voiceMode = false;

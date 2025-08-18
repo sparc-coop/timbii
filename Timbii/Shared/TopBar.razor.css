@@ -12,8 +12,10 @@
   left: 0;
   z-index: 20;
 }
-.top-bar h2 {
+.top-bar ::deep h2 {
+  margin-top: -4px;
   font-family: Halcom;
+  font-size: 1.6rem;
 }
 .top-bar ::deep .account-btn {
   width: 32px;
@@ -29,7 +31,7 @@
   padding: 16px;
   padding-top: 16px;
 }
-.top-bar.chats-page .left h2 {
+.top-bar.chats-page ::deep .left h2 {
   font-family: Halcom;
   font-size: 2rem;
   font-style: normal;
@@ -37,14 +39,14 @@
   line-height: 110%; /* 22px */
   letter-spacing: -0.4px;
 }
-.top-bar.chats-page .right {
+.top-bar.chats-page ::deep .right {
   display: flex;
   flex-direction: row;
   justify-content: end;
   align-items: center;
   gap: 4px;
 }
-.top-bar.chats-page .right button ::deep svg {
+.top-bar.chats-page ::deep .right button ::deep svg {
   width: 20px;
   height: 20px;
 }
@@ -53,38 +55,38 @@
   padding: 0 16px;
   box-shadow: 0 10px 20px 0 rgba(0, 18, 65, 0.04), 0 2px 6px 0 rgba(0, 18, 65, 0.04), 0 0 1px 0 rgba(0, 18, 65, 0.04);
 }
-.top-bar.chat-page .left {
+.top-bar.chat-page ::deep .left {
   display: flex;
   flex-direction: row;
   justify-content: start;
   align-items: center;
   gap: 8px;
 }
-.top-bar.chat-page .right {
+.top-bar.chat-page ::deep .right {
   display: flex;
   flex-direction: row;
   justify-content: end;
   align-items: center;
   gap: 4px;
 }
-.top-bar.chat-page .user-card {
+.top-bar.chat-page ::deep .user-card {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 8px;
 }
-.top-bar.chat-page .user-card .user-img {
+.top-bar.chat-page ::deep .user-card .user-img {
   width: 42px;
   height: 42px;
   border-radius: 50%;
   background: var(--surface-minimal);
 }
-.top-bar.chat-page .user-card .user-info {
+.top-bar.chat-page ::deep .user-card .user-info {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-.top-bar.chat-page .user-card .user-info h3 {
+.top-bar.chat-page ::deep .user-card .user-info h3 {
   color: var(--button-text, #2C2920);
   font-family: Halcom;
   font-size: 1.4rem;
@@ -92,7 +94,7 @@
   font-weight: 600;
   line-height: 2rem; /* 142.857% */
 }
-.top-bar.chat-page .user-card .user-info aside {
+.top-bar.chat-page ::deep .user-card .user-info aside {
   color: var(--button-subtitle, #4F4B40);
   font-family: Halcom;
   font-size: 1.2rem;
@@ -100,27 +102,27 @@
   font-weight: 400;
   line-height: 1.4rem; /* 140% */
 }
-.top-bar.chat-page .chat-actions {
+.top-bar.chat-page ::deep .chat-actions {
   display: flex;
   flex-direction: row;
   gap: 4px;
 }
-.top-bar.chat-page button ::deep svg {
+.top-bar.chat-page ::deep button ::deep svg {
   width: 20px;
   height: 20px;
 }
-.top-bar.new-chat {
+.top-bar.height-80 {
   height: 80px;
   padding: 0 16px;
 }
-.top-bar.new-chat .left {
+.top-bar.cols-2 ::deep .left {
   display: flex;
   flex-direction: row;
   justify-content: start;
   align-items: center;
   gap: 8px;
 }
-.top-bar.new-chat .right {
+.top-bar.cols-2 ::deep .right {
   display: flex;
   flex-direction: row;
   justify-content: end;

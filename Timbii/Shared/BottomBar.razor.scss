@@ -14,45 +14,49 @@
     border-radius: 32px 32px 0 0;
     background: var(--surface-high-contrast);
 
-    ::deep .nav-link {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 4px;
-        background: none;
-        color: var(--menu-icon-normal);
-        cursor: pointer;
+    .footer-menu {
+        ::deep .nav-link {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            background: none;
+            color: var(--menu-icon-normal);
+            cursor: pointer;
 
-        &.active {
-            color: var(--menu-icon-selected);
+            &.active {
+                color: var(--menu-icon-selected);
 
-            svg {
-                path {
-                    fill: var(--menu-icon-selected);
-                    stroke: var(--menu-icon-selected);
+                svg {
+                    path {
+                        fill: var(--menu-icon-selected);
+                        stroke: var(--menu-icon-selected);
+                    }
                 }
             }
-        }
 
-        span {
-            text-align: center;
-            font-family: Halcom;
-            font-size: 1.2rem;
-            font-style: normal;
-            font-weight: 500;
-            line-height: 120%; /* 14.4px */
-            letter-spacing: -0.12px;
+            span {
+                text-align: center;
+                font-family: Halcom;
+                font-size: 1.2rem;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 120%; /* 14.4px */
+                letter-spacing: -0.12px;
+            }
         }
     }
 
-    &.new-chat {
+    &.height-96 {
         height: 96px;
         padding: 16px;
         border-radius: 32px 32px 0 0;
         background: var(--surface-secondary, #F7F6EF);
+    }
 
-        .create-btn {
+    &.single-btn {
+        ::deep button.primary-btn {
             height: var(--button-height-large, 64px);
             padding: 16px 24px;
             justify-content: center;

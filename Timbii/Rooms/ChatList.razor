@@ -3,7 +3,18 @@
 
 <PageTitle>Chats</PageTitle>
 
- <TopBar Page="Chats" />
+<TopBar Page="chats-page" Styles="height-80 cols-2">
+    <div class="left">
+        <h2>Chats</h2>
+    </div>
+    <div class="right">
+        <button class="add-btn icon-btn" @onclick='() => Nav.NavigateTo("/chats/new")'><MessageAddIcon /></button>
+        <button class="search-btn icon-btn"><SearchIcon /></button>
+        <SparcAura>
+            <Presence Avatar="context" />
+        </SparcAura>
+    </div>
+</TopBar>
 
 <main>
     <div class="chat-list">
@@ -25,7 +36,7 @@
     </div>
 </main>
 
-<BottomBar />
+<BottomBar Page="chats-page" Styles="footer-menu" />
 
 @inject NavigationManager Nav
 @code {
@@ -47,11 +58,6 @@
     private void GoToRoom(MatrixRoom room)
     {
         Nav.NavigateTo("/chats/" + room.LocalId);
-    }
-
-    private void GoToCreateRoom()
-    {
-        Nav.NavigateTo("/chats/new");
     }
 
     private async Task JoinRoom(MatrixRoom room)

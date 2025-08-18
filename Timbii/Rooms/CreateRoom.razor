@@ -3,7 +3,18 @@
 
 <PageTitle>New Chat</PageTitle>
 
-<TopBar Page="New Chat" />
+<TopBar Page="new-chat" Styles="height-80 cols-2">
+    <div class="left">
+        <button class="back-btn icon-btn" @onclick='() => Nav.NavigateTo("/chats")'><ArrowLeftIcon Color="#7A7A7A" /></button>
+        <h2>Start New Chat</h2>
+    </div>
+    <div class="right">
+        <button class="add-btn icon-btn" @onclick='() => Nav.NavigateTo("/friends/new")'><UserAddIcon /></button>
+        <SparcAura>
+            <Presence Avatar="context" />
+        </SparcAura>
+    </div>
+</TopBar>
 
 <main>
     <div class="chats-search">
@@ -61,7 +72,9 @@
 
 @if (SelectedFriends.Count > 0)
 {
-    <BottomBar Page="New Chat" />
+    <BottomBar Page="new-chat" Styles="height-96 single-btn">
+        <button class="primary-btn create-btn">Create Chat</button>
+    </BottomBar>
 }
 
 @code {

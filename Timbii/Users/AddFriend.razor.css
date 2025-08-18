@@ -1,0 +1,80 @@
+﻿main {
+  height: 100vh;
+  padding: 0 32px;
+  padding-top: 80px;
+  padding-bottom: 64px;
+  background: var(--surface-secondary);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+form label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  align-self: stretch;
+}
+form label span {
+  color: var(--Input-label, #4F4B40);
+  leading-trim: both;
+  text-edge: cap;
+  /* Body/small/Medium */
+  font-family: Halcom;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 16.8px */
+}
+form label input {
+  display: flex;
+  height: var(--input-height, 64px);
+  padding: 8px var(--button-border-large, 20px);
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+  border: 1px solid transparent;
+  border-radius: var(--button-border-large, 20px);
+  background: var(--input-background, #EBE8D7);
+  color: var(--input-text, #2C2920);
+  leading-trim: both;
+  text-edge: cap;
+  /* Body/Regular/Medium */
+  font-family: Halcom;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 19.2px */
+  opacity: 0.7;
+}
+form label select {
+  display: flex;
+  height: var(--input-height, 64px);
+  padding: 8px var(--button-border-large, 20px);
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+  background: none;
+  leading-trim: both;
+  text-edge: cap;
+  border-radius: var(--button-border-large, 20px);
+  border: 1px solid var(--button-secondary-border, rgba(79, 75, 64, 0.2)); /* Body/Regular/Medium */
+  color: var(--input-text, #2C2920);
+  font-family: Halcom;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 19.2px */
+  opacity: 0.7;
+}
+form label select option {
+  font-family: Halcom;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 19.2px */
+  opacity: 0.7;
+}

@@ -2,7 +2,26 @@
 
 @layout AppLayout
 
-<TopBar Page="Chat" OnToggleVoiceMode=ToggleVoiceMode Room="Room" />
+<TopBar Page="chat-page" Styles="height-80 cols-2">
+    <div class="left">
+        <button class="back-btn icon-btn" @onclick='() => Nav.NavigateTo("/chats")'><ArrowLeftIcon Color="#7A7A7A" /></button>
+        <div class="user-card">
+            <div class="user-img">
+            </div>
+            <div class="user-info">
+                <h3>@(Room != null ? (Room.Name ?? Room.RoomId.Substring(0, 16)) : "")</h3>
+                <aside>@(Room != null ? Room.Topic : "")</aside>
+            </div>
+        </div>
+    </div>
+    <div class="right chat-actions">
+        <button class="voice-btn icon-btn" @onclick=ToggleVoiceMode><VoiceModeIcon VoiceMode=voiceMode /></button>
+        <SparcAura>
+            <Presence Avatar="context" />
+        </SparcAura>
+        <button class="more-btn icon-btn"><MenuIcon /></button>
+    </div>
+</TopBar>
 
 <main>
     <div class="message-list">
@@ -69,11 +88,6 @@
         }
     }
 
-    void ToggleVoiceMode(bool voiceBool)
-    {
-        voiceMode = voiceBool;
-    }
-
     private bool IsUserMessage(string userId)
     {
         var matrixId = User?.Identities?.FirstOrDefault(x => x.Type == "Matrix")?.Id;
@@ -85,5 +99,15 @@
         {
             return false;
         }
+    }
+
+    void ToggleVoiceMode()
+    {
+        voiceMode = !voiceMode;
+    }
+
+    private void GoToCreateRoom()
+    {
+        Nav.NavigateTo("/chats/new");
     }
 }

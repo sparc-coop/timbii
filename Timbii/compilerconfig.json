@@ -28,60 +28,20 @@
     "inputFile": "Shared/BottomBar.razor.scss"
   },
   {
-    "outputFile": "Shared/Components/UserCard.razor.css",
-    "inputFile": "Shared/Components/UserCard.razor.scss"
+    "outputFile": "Rooms/ChatCard.razor.css",
+    "inputFile": "Rooms/ChatCard.razor.scss"
   },
   {
-    "outputFile": "Shared/Components/ContactCard.razor.css",
-    "inputFile": "Shared/Components/ContactCard.razor.scss"
+    "outputFile": "Rooms/MessageCard.razor.css",
+    "inputFile": "Rooms/MessageCard.razor.scss"
   },
   {
-    "outputFile": "Shared/Components/ProgressBar.razor.css",
-    "inputFile": "Shared/Components/ProgressBar.razor.scss"
+    "outputFile": "Rooms/MessageGroup.razor.css",
+    "inputFile": "Rooms/MessageGroup.razor.scss"
   },
   {
-    "outputFile": "Shared/Components/MyContactActions.razor.css",
-    "inputFile": "Shared/Components/MyContactActions.razor.scss"
-  },
-  {
-    "outputFile": "Shared/Components/NewContactActions.razor.css",
-    "inputFile": "Shared/Components/NewContactActions.razor.scss"
-  },
-  {
-    "outputFile": "Shared/Components/ChatCard.razor.css",
-    "inputFile": "Shared/Components/ChatCard.razor.scss"
-  },
-  {
-    "outputFile": "Shared/Components/MessageCard.razor.css",
-    "inputFile": "Shared/Components/MessageCard.razor.scss"
-  },
-  {
-    "outputFile": "Shared/Components/MessageGroup.razor.css",
-    "inputFile": "Shared/Components/MessageGroup.razor.scss"
-  },
-  {
-    "outputFile": "Shared/Components/ChatBar.razor.css",
-    "inputFile": "Shared/Components/ChatBar.razor.scss"
-  },
-  {
-    "outputFile": "Shared/Components/FriendCard.razor.css",
-    "inputFile": "Shared/Components/FriendCard.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Index.razor.css",
-    "inputFile": "Pages/Index.razor.scss"
-  },
-  {
-    "outputFile": "Pages/EditContact.razor.css",
-    "inputFile": "Pages/EditContact.razor.scss"
-  },
-  {
-    "outputFile": "Pages/NewContact.razor.css",
-    "inputFile": "Pages/NewContact.razor.scss"
-  },
-  {
-    "outputFile": "Pages/Chat.razor.css",
-    "inputFile": "Pages/Chat.razor.scss"
+    "outputFile": "Rooms/ChatBar.razor.css",
+    "inputFile": "Rooms/ChatBar.razor.scss"
   },
   {
     "outputFile": "Rooms/ChatList.razor.css",
@@ -98,5 +58,13 @@
   {
     "outputFile": "Rooms/Presence.razor.css",
     "inputFile": "Rooms/Presence.razor.scss"
+  },
+  {
+    "outputFile": "Users/FriendCard.razor.css",
+    "inputFile": "Users/FriendCard.razor.scss"
+  },
+  {
+    "outputFile": "Users/AddFriend.razor.css",
+    "inputFile": "Users/AddFriend.razor.scss"
   }
 ]

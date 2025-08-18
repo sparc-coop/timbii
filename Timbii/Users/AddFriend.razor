@@ -1,0 +1,49 @@
+﻿@page "/friends/new"
+@layout AppLayout
+
+<PageTitle>Add Friend</PageTitle>
+
+<TopBar Page="add-friend" Styles="height-80 cols-2">
+    <div class="left">
+        <button class="back-btn icon-btn" @onclick='() => Nav.NavigateTo("/chats/new")'><ArrowLeftIcon Color="#7A7A7A" /></button>
+        <h2>Add Friend</h2>
+    </div>
+    <div class="right">
+        <SparcAura>
+            <Presence Avatar="context" />
+        </SparcAura>
+    </div>
+</TopBar>
+
+<main>
+    <form class="friend-form">
+        <label>
+            <span>Add by phone or email</span>
+            <input type="text" @bind="NewPhoneOrEmail" placeholder="Select a chat name" />
+        </label>
+        <label>
+            <span>Name</span>
+            <input type="text" @bind=NewFriend placeholder="Friend's Name"/>
+        </label>
+        <label>
+            <span>Language</span>
+            <select>
+                <option value="0">Select language</option>
+            </select>
+        </label>
+    </form>
+</main>
+
+<BottomBar Page="add-friend" Styles="height-96 single-btn">
+    <button class="primary-btn addfriend-btn" @onclick=CreateFriend disabled=@(string.IsNullOrEmpty(NewFriend))>Add Friend</button>
+</BottomBar>
+
+@code {
+    string NewPhoneOrEmail;
+    string NewFriend;
+
+    private void CreateFriend()
+    {
+        // logic to add friend
+    }
+}
