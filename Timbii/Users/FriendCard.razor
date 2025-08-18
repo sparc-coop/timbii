@@ -1,4 +1,4 @@
-﻿@if (Page == "New Chat")
+﻿@if (Page == "new-chat")
 {
     @if (List == "all")
     {
@@ -35,6 +35,36 @@
             <h4>@(Friend.Length > 5 ? $"{Friend.Substring(0, 5)}..." : Friend)</h4>
          </div>
     }
+} else if (Page == "friends-page")
+{
+    if (List == "all")
+    {
+        <div class="friend-card">
+            <div class="left">
+                <div class="profile-img"></div>
+                <div class="friend-info">
+                    <h4>@Friend</h4>
+                    <p>Short Status Message</p>
+                </div>
+            </div>
+        </div>
+
+    } else if (List == "requests")
+    {
+        <div class="friend-card request">
+            <div class="left">
+                <div class="profile-img"></div>
+                <div class="friend-info">
+                    <h4>@Friend</h4>
+                    <p>Short Status Message</p>
+                </div>
+            </div>
+            <div class="right">
+                <button class="accept-btn" @onclick=Accept>Accept</button>
+                <button class="ignore-btn" @onclick=Ignore>Ignore</button>
+            </div>
+        </div>
+    }
 } else
 {
     <div class="friend-card">
@@ -54,10 +84,12 @@
 @code {
     [Parameter] public string Friend { get; set; }
     [Parameter] public string Page { get; set; }
-    [Parameter] public bool IsSelected { get; set; }
     [Parameter] public string List { get; set; }
+    [Parameter] public bool IsSelected { get; set; }
     [Parameter] public EventCallback<string> OnSelect { get; set; }
     [Parameter] public EventCallback<string> OnDeselect { get; set; }
+    [Parameter] public EventCallback<string> OnAccept { get; set; }
+    [Parameter] public EventCallback<string> OnIgnore { get; set; }
 
     void ToggleFriend()
     {
@@ -69,5 +101,15 @@
         {
             OnDeselect.InvokeAsync(Friend);
         }
+    }
+
+    void Accept()
+    {
+        OnAccept.InvokeAsync(Friend);
+    }
+
+    void Ignore() 
+    {
+        OnIgnore.InvokeAsync(Friend);
     }
 }

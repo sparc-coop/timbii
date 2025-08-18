@@ -32,18 +32,6 @@
     "inputFile": "Rooms/ChatCard.razor.scss"
   },
   {
-    "outputFile": "Rooms/MessageCard.razor.css",
-    "inputFile": "Rooms/MessageCard.razor.scss"
-  },
-  {
-    "outputFile": "Rooms/MessageGroup.razor.css",
-    "inputFile": "Rooms/MessageGroup.razor.scss"
-  },
-  {
-    "outputFile": "Rooms/ChatBar.razor.css",
-    "inputFile": "Rooms/ChatBar.razor.scss"
-  },
-  {
     "outputFile": "Rooms/ChatList.razor.css",
     "inputFile": "Rooms/ChatList.razor.scss"
   },
@@ -60,11 +48,27 @@
     "inputFile": "Rooms/Presence.razor.scss"
   },
   {
+    "outputFile": "Messages/ChatBar.razor.css",
+    "inputFile": "Messages/ChatBar.razor.scss"
+  },
+  {
+    "outputFile": "Messages/MessageCard.razor.css",
+    "inputFile": "Messages/MessageCard.razor.scss"
+  },
+  {
+    "outputFile": "Messages/MessageGroup.razor.css",
+    "inputFile": "Messages/MessageGroup.razor.scss"
+  },
+  {
     "outputFile": "Users/FriendCard.razor.css",
     "inputFile": "Users/FriendCard.razor.scss"
   },
   {
     "outputFile": "Users/AddFriend.razor.css",
     "inputFile": "Users/AddFriend.razor.scss"
+  },
+  {
+    "outputFile": "Users/FriendList.razor.css",
+    "inputFile": "Users/FriendList.razor.scss"
   }
 ]

@@ -1,0 +1,107 @@
+﻿@page "/friends"
+@layout AppLayout
+
+<TopBar Page="friends-page" Styles="height-80 cols-2">
+    <div class="left">
+        <h2>Friends</h2>    
+    </div>
+    <div class="right">
+        <button class="add-btn icon-btn" @onclick='() => Nav.NavigateTo("/friends/new")'><UserAddIcon /></button>
+        <button class="search-btn icon-btn" @onclick=@ShowSearch><SearchIcon /></button>
+        <SparcAura>
+            <Presence Avatar="context" />
+        </SparcAura>
+    </div>
+</TopBar>
+
+<main>
+    @if (showSearch)
+    {
+        <div class="friends-search">
+            <SearchIcon />
+            <input type="text" placeholder="Search" />
+        </div>
+    }
+    <article class="friends-list">
+        @if (FriendRequests.Count > 0)
+        {
+            <div class="friend-requests  @(collapseRequests ? "collapsed" : "")">
+                <header>
+                    <h3>Requests <span>@FriendRequests.Count()</span></h3>
+                    <button class="icon-btn collapse-btn" @onclick='() => ToggleList("requests")'><ChevronDownIcon /></button>
+                </header>
+                <ul>
+                    @foreach (var friend in FriendRequests)
+                    {
+                        <li @key=friend><FriendCard Friend=@friend Page="friends-page" List="requests" OnAccept="AcceptFriend" OnIgnore="IgnoreUser" /></li>
+                    }
+                </ul>
+            </div>
+        }
+        <div class="all-friends  @(collapseAll ? "collapsed" : "")">
+            <header>
+                <h3>All Friends <span>@Friends.Count()</span></h3>
+                <button class="icon-btn collapse-btn" @onclick='() => ToggleList("all")'><ChevronDownIcon /></button>
+            </header>
+            <ul>
+                @foreach (var friend in Friends)
+                {
+                    <li @key=friend><FriendCard Friend=@friend Page="friends-page" List="all" /></li>
+                }
+            </ul>
+        </div>
+    </article>
+</main>
+
+<BottomBar Page="friends-page" Styles="footer-menu" />
+
+@code {
+    List<string> Friends = [];
+    List<string> FriendRequests = [];
+    bool showSearch;
+    bool collapseAll;
+    bool collapseRequests;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Friends.Add("Christine");
+        Friends.Add("Joseph");
+        Friends.Add("Laura");
+        Friends.Add("Fernando");
+        Friends.Add("Yoojung");
+        Friends.Add("Ana");
+
+        Friends = Friends.OrderBy(f => f).ToList();
+
+        FriendRequests.Add("John Doe");
+        FriendRequests.Add("Jane Smith");
+    }
+
+    void ShowSearch()
+    {
+        showSearch = !showSearch;
+    }
+
+    void ToggleList(string list)
+    {
+        if (list == "all")
+        {
+            collapseAll = !collapseAll;
+        }
+        else if (list == "requests")
+        {
+            collapseRequests = !collapseRequests;
+        }
+    }
+
+    void AcceptFriend(string friend)
+    {
+        FriendRequests.Remove(friend);
+        Friends.Add(friend);
+    }
+
+    void IgnoreUser(string friend)
+    {
+        FriendRequests.Remove(friend);
+    }
+}

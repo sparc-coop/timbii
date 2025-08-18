@@ -43,7 +43,7 @@
                 <ul>
                     @foreach (var friend in SelectedFriends)
                     {
-                        <li @key=friend><FriendCard Friend=@friend Page="New Chat" List="selected" IsSelected=true OnSelect=SelectFriend OnDeselect=DeselectFriend /></li>
+                        <li @key=friend><FriendCard Friend=@friend Page="new-chat" List="selected" IsSelected=true OnSelect=SelectFriend OnDeselect=DeselectFriend /></li>
                     }
                 </ul>
             </div>
@@ -58,10 +58,10 @@
                 {
                     if (!SelectedFriends.Contains(friend))
                     {
-                        <li @key=friend><FriendCard Friend=@friend Page="New Chat" List="all" IsSelected=false OnSelect=SelectFriend OnDeselect=DeselectFriend /></li>
+                        <li @key=friend><FriendCard Friend=@friend Page="new-chat" List="all" IsSelected=false OnSelect=SelectFriend OnDeselect=DeselectFriend /></li>
                     } else
                     {
-                        <li @key=friend><FriendCard Friend=@friend Page="New Chat" List="all" IsSelected=true OnSelect=SelectFriend OnDeselect=DeselectFriend /></li>
+                        <li @key=friend><FriendCard Friend=@friend Page="new-chat" List="all" IsSelected=true OnSelect=SelectFriend OnDeselect=DeselectFriend /></li>
                     }
                 }
             </ul>

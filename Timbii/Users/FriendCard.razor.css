@@ -140,3 +140,40 @@
 .friend-card.selected .friend-avatar ::deep svg path {
   stroke: var(--icon-primary, #FFFFFF);
 }
+.friend-card.request {
+  flex-direction: column;
+}
+.friend-card.request > * {
+  width: 100%;
+}
+.friend-card.request .right {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+.friend-card.request .right button {
+  height: var(--button-height-medium, 40px);
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border-radius: var(--button-border-medium, 16px);
+  border: 1px solid var(--button-secondary-border, rgba(79, 75, 64, 0.2));
+  color: var(--button-ghost-text-normal, #4F4B40);
+  leading-trim: both;
+  text-edge: cap;
+  /* Body/Regular/Medium */
+  font-family: Halcom;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 19.2px */
+}
+.friend-card.request .right button:first-child {
+  width: 75%;
+}
+.friend-card.request .right button:active {
+  border: 1px solid var(--button-primary-border);
+  color: var(--button-primary-pressed);
+}

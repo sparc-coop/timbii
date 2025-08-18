@@ -13,7 +13,7 @@
   border-radius: 32px 32px 0 0;
   background: var(--surface-high-contrast);
 }
-.bottom-bar .footer-menu ::deep .nav-link {
+.bottom-bar.footer-menu ::deep .nav-link {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,14 +23,14 @@
   color: var(--menu-icon-normal);
   cursor: pointer;
 }
-.bottom-bar .footer-menu ::deep .nav-link.active {
+.bottom-bar.footer-menu ::deep .nav-link.active {
   color: var(--menu-icon-selected);
 }
-.bottom-bar .footer-menu ::deep .nav-link.active svg path {
+.bottom-bar.footer-menu ::deep .nav-link.active svg path {
   fill: var(--menu-icon-selected);
   stroke: var(--menu-icon-selected);
 }
-.bottom-bar .footer-menu ::deep .nav-link span {
+.bottom-bar.footer-menu ::deep .nav-link span {
   text-align: center;
   font-family: Halcom;
   font-size: 1.2rem;
