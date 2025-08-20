@@ -15,35 +15,78 @@
     </div>
 </TopBar>
 
-<main>
-    <form class="friend-form">
-        <label>
-            <span>Add by phone or email</span>
-            <input type="text" @bind="NewPhoneOrEmail" placeholder="Select a chat name" />
-        </label>
-        <label>
-            <span>Name</span>
-            <input type="text" @bind=NewFriend placeholder="Friend's Name"/>
-        </label>
-        <label>
-            <span>Language</span>
-            <select>
-                <option value="0">Select language</option>
-            </select>
-        </label>
-    </form>
+<main class="@(activeTab == "qr" ? "no-footer" : "")">
+    <ul class="tabs-container">
+        <li><button class="tab-btn @(activeTab == "contact" ? "active" : "")" @onclick='() => SetActiveTab("contact")'><ContactIcon IsActive=@(activeTab == "contact" ? true : false) /><span>Contact</span></button></li>
+        <li><button class="tab-btn @(activeTab == "qr" ? "active" : "")" @onclick='() => SetActiveTab("qr")'><ScanIcon IsActive=@(activeTab == "qr" ? true : false) /><span>QR code</span></button></li>
+        <li><button class="tab-btn @(activeTab == "code" ? "active" : "")" @onclick='() => SetActiveTab("code")'><HeartSmileIcon IsActive=@(activeTab == "code" ? true : false) /><span>Add code</span></button></li>
+    </ul>
+    <div class="form-container">
+        @if (activeTab == "contact")
+        {
+            <form class="friend-form">
+                <label>
+                    <span>Add by phone or email</span>
+                    <input type="text" @bind="NewPhoneOrEmail" placeholder="Select a chat name" />
+                </label>
+                <label>
+                    <span>Name</span>
+                    <input type="text" @bind=NewFriend placeholder="Friend's Name"/>
+                </label>
+                <label>
+                    <span>Language</span>
+                    <select>
+                        <option value="0">Select language</option>
+                    </select>
+                </label>
+            </form>
+        } else if (activeTab == "qr")
+        {
+            <div class="qr-code">
+                <img src="/images/qr-fake.png" />
+                <aside>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9" fill="none">
+                        <path d="M5.13404 0.500001C5.51894 -0.166666 6.48119 -0.166667 6.86609 0.5L11.7736 9H0.226563L5.13404 0.500001Z" fill="#DB571F" />
+                    </svg>
+                    <span>Let your friend scan your code!</span>
+                </aside>
+            </div>
+        } else if (activeTab == "code")
+        {
+            <form class="code-form">
+                <header>
+                    <h3>Your friend code is:</h3>
+                    <p>1234567890123</p>
+                </header>
+                <label>
+                    <span>Add by friend code</span>
+                    <input type="text" placeholder="Enter 00 digit code" @bind=NewFriend /> 
+                </label>
+            </form>
+        }
+    </div>
 </main>
 
-<BottomBar Page="add-friend" Styles="height-96 single-btn">
-    <button class="primary-btn addfriend-btn" @onclick=CreateFriend disabled=@(string.IsNullOrEmpty(NewFriend))>Add Friend</button>
-</BottomBar>
+@if (activeTab == "contact" || activeTab == "code")
+{
+    <BottomBar Page="add-friend" Styles="height-96 single-btn">
+        <button class="primary-btn addfriend-btn" @onclick=CreateFriend disabled=@(string.IsNullOrEmpty(NewFriend))>Add Friend</button>
+    </BottomBar>
+}
 
 @code {
     string NewPhoneOrEmail;
     string NewFriend;
+    string FriendCode;
+    string activeTab = "contact";
 
     private void CreateFriend()
     {
         // logic to add friend
+    }
+
+    void SetActiveTab(string tab)
+    {
+        activeTab = tab;
     }
 }

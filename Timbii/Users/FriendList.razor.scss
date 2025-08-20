@@ -11,6 +11,7 @@ main {
         display: flex;
         height: var(--input-height, 64px);
         padding: 8px var(--button-border-large, 20px);
+        margin-bottom: 10px;
         align-items: center;
         gap: 12px;
         align-self: stretch;
