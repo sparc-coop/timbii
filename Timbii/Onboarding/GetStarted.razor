@@ -1,0 +1,16 @@
+﻿@page "/onboarding/"
+@layout AppLayout
+
+<main class="onboarding">
+    <div class="avatar-container">
+        <Logo2 />
+    </div>
+    <header>
+        <h2>Duis aute irure dolor</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  veniam!</p>
+    </header>
+</main>
+
+<BottomBar Page="onboarding" Styles="single-btn">
+    <button class="primary-btn" @onclick='() => Nav.NavigateTo("/onboarding/language")'>Get Started</button>
+</BottomBar>

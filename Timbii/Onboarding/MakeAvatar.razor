@@ -1,0 +1,26 @@
+﻿@page "/onboarding/avatar"
+@layout AppLayout
+
+<main class="onboarding">
+    <header>
+        <h2>Make your avatar!</h2>
+    </header>
+    <div class="avatar-container">
+        <img src="images/avatar.svg" />
+    </div>
+    <form>
+        <label>
+            <span>What should we all you?</span>
+            <input type="text" placeholder="Preferred name" @bind=Name />
+        </label>
+    </form>
+</main>
+
+<BottomBar Page="onboarding-avatar" Styles="onboarding-btns">
+    <button class="secondary-btn" @onclick='() => Nav.NavigateTo("/onboarding/language")'>Back</button>
+    <button class="primary-btn" @onclick='() => Nav.NavigateTo("/onboarding/profile")'>Next</button>
+</BottomBar>
+
+@code {
+    string Name;
+}

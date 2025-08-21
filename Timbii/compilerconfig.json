@@ -70,5 +70,21 @@
   {
     "outputFile": "Users/FriendList.razor.css",
     "inputFile": "Users/FriendList.razor.scss"
+  },
+  {
+    "outputFile": "Onboarding/GetStarted.razor.css",
+    "inputFile": "Onboarding/GetStarted.razor.scss"
+  },
+  {
+    "outputFile": "Onboarding/SelectLanguage.razor.css",
+    "inputFile": "Onboarding/SelectLanguage.razor.scss"
+  },
+  {
+    "outputFile": "Onboarding/MakeAvatar.razor.css",
+    "inputFile": "Onboarding/MakeAvatar.razor.scss"
+  },
+  {
+    "outputFile": "Onboarding/AboutYou.razor.css",
+    "inputFile": "Onboarding/AboutYou.razor.scss"
   }
 ]

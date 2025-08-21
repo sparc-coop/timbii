@@ -1,0 +1,38 @@
+﻿@page "/onboarding/profile"
+@layout AppLayout
+
+<main class="onboarding">
+    <header>
+        <h2>About you</h2>
+    </header>
+    <div class="profile">
+        <div class="profile-img">
+            <img class="avatar" src="images/avatar2.svg" />
+        </div>
+        <div class="user-language">
+            <GlobeIcon />
+            <p>Language</p>
+        </div>
+    </div>
+    <form>
+        <label>
+            <span>
+                Status message
+            </span>
+            <input type="text" placeholder="Status message"/>
+        </label>
+        <label>
+            <span>About you</span>
+            <textarea placeholder="Tell us about yourself" rows="6" />
+        </label>
+    </form>
+</main>
+
+<BottomBar Page="onboarding-avatar" Styles="onboarding-btns">
+    <button class="secondary-btn" @onclick='() => Nav.NavigateTo("/onboarding/avatar")'>Back</button>
+    <button class="primary-btn" @onclick='() => Nav.NavigateTo("/onboarding/complete")'>Next</button>
+</BottomBar>
+
+@code {
+    string Name;
+}

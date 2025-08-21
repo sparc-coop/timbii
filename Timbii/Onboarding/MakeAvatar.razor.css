@@ -1,0 +1,27 @@
+﻿main {
+  height: 100vh;
+  padding: 16px;
+  padding-top: 32px;
+  padding-bottom: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+  background: var(--surface-secondary);
+}
+
+header {
+  width: 100%;
+}
+header h2 {
+  color: #000;
+  text-align: center;
+  /* Heading 6/Medium */
+  font-family: Halcom;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%; /* 22px */
+  letter-spacing: -0.4px;
+}

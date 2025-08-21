@@ -1,15 +1,20 @@
 ﻿.bottom-bar {
   width: 100%;
-  height: 64px;
-  padding: 16px 40px;
+  height: 96px;
+  padding: 16px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
   position: fixed;
   bottom: 0;
   left: 0;
+}
+.bottom-bar.footer-menu {
+  height: 64px;
+  padding: 16px 40px;
+  gap: 16px;
   border-radius: 32px 32px 0 0;
   background: var(--surface-high-contrast);
 }
@@ -63,4 +68,49 @@
   font-style: normal;
   font-weight: 500;
   line-height: 120%; /* 19.2px */
+}
+.bottom-bar.single-btn ::deep button.primary-btn:active {
+  background: var(--button-primary-pressed);
+}
+.bottom-bar.onboarding-btns ::deep button {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--button-border-large, 20px);
+}
+.bottom-bar.onboarding-btns ::deep button.primary-btn {
+  width: calc(80% - 24px);
+  height: var(--button-height-large, 64px);
+  background: var(--button-primary-normal, #DB571F);
+  color: var(--text-invert, #F7F6EF);
+  leading-trim: both;
+  text-edge: cap;
+  /* Body/Regular/Medium */
+  font-family: Halcom;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 19.2px */
+}
+.bottom-bar.onboarding-btns ::deep button.primary-btn:active {
+  background: var(--button-primary-pressed);
+}
+.bottom-bar.onboarding-btns ::deep button.secondary-btn {
+  height: var(--button-height-large, 64px);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--button-border-large, 20px);
+  color: var(--button-ghost-text-normal, #4F4B40);
+  leading-trim: both;
+  text-edge: cap;
+  /* Body/Regular/Medium */
+  font-family: Halcom;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 19.2px */
+}
+.bottom-bar.onboarding-btns ::deep button.secondary-btn:active {
+  background: var(--surface-primary);
 }

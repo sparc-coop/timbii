@@ -1,0 +1,39 @@
+﻿@page "/onboarding/language"
+@layout AppLayout
+
+<main class="onboarding">
+    <header>
+        <h2>Select Your Language</h2>
+    </header>
+    <div class="search-bar language-search">
+        <SearchIcon />
+        <input type="text" placeholder="Search" />
+    </div>
+    <ul>
+        @foreach (var language in Languages)
+        {
+            <li>
+                <h3>@language.Key</h3>
+                <p>@language.Value</p>
+            </li>
+        }
+    </ul>
+</main>
+
+<BottomBar Page="onboarding-language" Styles="onboarding-btns">
+    <button class="secondary-btn" @onclick='() => Nav.NavigateTo("/onboarding/")'>Back</button>
+    <button class="primary-btn" @onclick='() => Nav.NavigateTo("/onboarding/avatar")'>Next</button>
+</BottomBar>
+
+@code {
+    Dictionary<string, string> Languages = new Dictionary<string, string>();
+
+    protected override void OnInitialized()
+    {
+        Languages.Add("English", "Hello");
+        Languages.Add("Spanish", "Hola");
+        Languages.Add("French", "Bonjour");
+        Languages.Add("Italian", "Ciao");
+        Languages.Add("Portuguese", "Olá");
+    }
+}
