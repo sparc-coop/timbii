@@ -3,7 +3,7 @@
 
     @if (Styles.Contains("footer-menu"))
     {
-        <NavLink class="nav-link friends-btn" href="/friends" ActiveClass="active" Match="NavLinkMatch.All">
+        <NavLink class="nav-link friends-btn" href="/friends" ActiveClass="active" Match="NavLinkMatch.Prefix">
             <FriendsIcon Color="var(--egg-50)" />
             <span>Friends</span>
         </NavLink>
@@ -12,7 +12,7 @@
             <ChatsIcon Color="var(--egg-50)" />
             <span>Chats</span>
         </NavLink>
-        <NavLink class="nav-link settings-btn" href="/settings" ActiveClass="active" Match="NavLinkMatch.All">
+        <NavLink class="nav-link settings-btn" href="/settings" ActiveClass="active" Match="NavLinkMatch.Prefix">
             <MoreSettingsIcon Color="var(--egg-50)" />
             <span>More</span>
         </NavLink>

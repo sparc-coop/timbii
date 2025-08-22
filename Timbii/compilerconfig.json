@@ -48,6 +48,10 @@
     "inputFile": "Rooms/Presence.razor.scss"
   },
   {
+    "outputFile": "Rooms/ChatSettings.razor.css",
+    "inputFile": "Rooms/ChatSettings.razor.scss"
+  },
+  {
     "outputFile": "Messages/ChatBar.razor.css",
     "inputFile": "Messages/ChatBar.razor.scss"
   },

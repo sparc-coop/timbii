@@ -1,5 +1,4 @@
-﻿@page "/chats/{roomId}"
-
+﻿@page "/chats/{RoomId}"
 @layout AppLayout
 
 <TopBar Page="chat-page" Styles="height-80 cols-2">
@@ -9,7 +8,7 @@
             <div class="user-img">
             </div>
             <div class="user-info">
-                <h3>@(Room != null ? (Room.Name ?? Room.RoomId.Substring(0, 16)) : "")</h3>
+                <h3>@(Room != null ? (Room.Name ?? $"{Room.RoomId.Substring(0, 10)}...") : "")</h3>
                 <aside>@(Room != null ? Room.Topic : "")</aside>
             </div>
         </div>
@@ -19,7 +18,7 @@
         <SparcAura>
             <Presence Avatar="context" />
         </SparcAura>
-        <button class="more-btn icon-btn"><MenuIcon /></button>
+        <button class="more-btn icon-btn" @onclick='() => Nav.NavigateTo($"/settings/{RoomId}")'><MenuIcon /></button>
     </div>
 </TopBar>
 
@@ -35,8 +34,6 @@
 </main>
 
 <ChatBar OnSendMessage=SendMessage VoiceMode=@voiceMode MessageSent=messageSent />
-
-@inject ISparcAura Aura
 
 @code {
     [Parameter] public required string RoomId { get; set; }

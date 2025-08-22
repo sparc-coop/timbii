@@ -177,3 +177,17 @@
   border: 1px solid var(--button-primary-border);
   color: var(--button-primary-pressed);
 }
+.friend-card.chat-settings .left .avatar {
+  position: relative;
+}
+.friend-card.chat-settings .left .avatar .status-bubble {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 2px solid var(--surface-secondary);
+  background: var(--icon-secondary);
+}

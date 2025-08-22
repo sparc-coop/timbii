@@ -15,7 +15,11 @@
 .top-bar ::deep h2 {
   margin-top: -4px;
   font-family: Halcom;
-  font-size: 1.6rem;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%;
+  letter-spacing: -0.4px;
 }
 .top-bar ::deep .account-btn {
   width: 32px;

@@ -2,8 +2,8 @@
   height: 100vh;
   padding-top: 80px;
   padding-bottom: 64px;
-  padding-right: 0;
   background: var(--surface-secondary);
+  overflow: hidden;
 }
 main .chat-list {
   width: 100%;
@@ -16,5 +16,13 @@ main .chat-list {
   overflow-y: auto;
 }
 main .chat-list ::deep .chat-card {
-  margin-right: 16px;
+  margin: 0 16px;
+}
+main .chats-search {
+  display: none;
+}
+main .chats-search.show {
+  display: flex;
+  width: calc(100% - 32px);
+  margin: 16px;
 }

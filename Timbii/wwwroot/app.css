@@ -171,7 +171,7 @@ html.modal-open, body.modal-open {
 h1, h2, h3, h4, h5, h6, h7 {
   margin: 0;
   padding: 0;
-  font-family: Formiga;
+  font-family: Formiga, Helvetica, sans-serif;
 }
 
 p, ul, li {
@@ -180,7 +180,7 @@ p, ul, li {
   font-family: Halcom, Helvetica, sans-serif;
 }
 
-button, input, select, textarea {
+button, label, input, select, textarea {
   font-family: Halcom, Helvetica, sans-serif;
 }
 
@@ -201,7 +201,6 @@ button {
   flex-shrink: 0;
   border: 1px solid transparent;
   cursor: pointer;
-  font-family: Halcom;
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 500;
@@ -300,7 +299,6 @@ button.text-btn {
   border: none;
   color: var(--text-primary);
   text-align: center;
-  font-family: Halcom;
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 400;
@@ -350,11 +348,10 @@ form label {
 }
 form label span {
   padding-left: 16px;
-  color: var(--Input-label, #4F4B40);
+  color: var(--input-label, #4F4B40);
   leading-trim: both;
   text-edge: cap;
   /* Body/small/Medium */
-  font-family: Halcom;
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
@@ -492,6 +489,10 @@ hr {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.account-dialog dialog {
+  border-radius: 0 !important;
 }
 
 main.onboarding {

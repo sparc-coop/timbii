@@ -1,0 +1,82 @@
+﻿@page "/settings/{RoomId}"
+@layout AppLayout
+
+<TopBar Styles="height-80 cols-2">
+    <div class="left">
+        <button class="back-btn icon-btn" @onclick='() => Nav.NavigateTo($"/chats/{RoomId}")'><ArrowLeftIcon Color="#7A7A7A" /></button>
+    </div>
+    <div class="right chat-actions">
+        <button class="star-btn icon-btn" @onclick=ToggleStar><StarIcon IsStarred=IsStarred /></button>
+        <SparcAura>
+            <Presence Avatar="context" />
+        </SparcAura>
+    </div>
+</TopBar>
+
+<main>
+    <header>
+        @if (Participants.Count() > 2)
+        {
+            <div class="chat-img group-chat">
+                @foreach (var user in Participants.Take(4))
+                {
+                    <div class="user-img"></div>
+                }
+            </div>
+        } else
+        {
+            <div class="chat-img">
+                <div class="user-img"></div>
+            </div>
+        }
+        <div class="chat-name">
+            <h3>@(Room != null ? (Room.Name ?? $"{Room.RoomId.Substring(0, 10)}...") : "")</h3>
+        </div>
+    </header>
+    <div class="search-bar chat-invite">
+        <SearchIcon />
+        <input type="text" placeholder="Search" />
+    </div>
+    <div class="participant-list">
+        <h3>Participants <span>@Participants.Count()</span></h3>
+        <ul>
+            @foreach (var participant in Participants)
+            {
+                @if (participant == User.Id) {
+                    <li @key=participant><FriendCard Friend=@participant Page="chat-settings" IsAdmin=true /></li>
+                } else
+                {
+                    <li @key=participant><FriendCard Friend=@participant Page="chat-settings" /></li>
+                }
+            }
+        </ul>
+    </div>
+</main>
+
+@code {
+    [Parameter] public required string RoomId { get; set; }
+
+    BlossomUser? User { get; set; }
+    private MatrixRoom? Room { get; set; }
+    List<string> Participants = [];
+    bool IsStarred;
+
+    protected async override Task OnInitializedAsync()
+    {
+        User = await Aura.UserInfo();
+        Participants.Add(User.Id);
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (!string.IsNullOrWhiteSpace(RoomId))
+        {
+            Room = await Chats.GetRoomSummaryAsync(RoomId);
+        }
+    }
+
+    void ToggleStar()
+    {
+        IsStarred = !IsStarred;
+    }
+}
