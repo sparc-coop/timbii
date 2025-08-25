@@ -7,20 +7,27 @@
             @if (!VoiceMode)
             {
                 @* <textarea id="chat-textarea" type="text" rows="1" @bind=Text placeholder="Type your message..." oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' style="@(string.IsNullOrEmpty(Text) ? "height: fit-content;" : "")" @ref=TextArea @onkeydown=InitiateMessage @onkeydown:preventDefault="preventDefault" /> *@
-                <div id="chat-textarea" data-text="Type to send messages..." aria-label="Message" contenteditable  @ref=TextArea @onkeydown=HandleEnter @onkeydown:preventDefault="preventDefault">
+                <div id="chat-textarea" data-text="Type to send messages..." aria-label="Message" contenteditable  @ref=TextArea @onkeydown=HandleEnter>
                 </div>
             } else
             {
-                @* <textarea id="chat-textarea" type="text" rows="1" @bind=Transcription placeholder="Speak anytime..." oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' style="@(string.IsNullOrEmpty(Transcription) ? "height: fit-content;" : "")" @ref=TextArea @onkeydown=InitiateMessage @onkeydown:preventDefault="preventDefault" /> *@
-                <div id="chat-textarea" placeholder="Speak anytime..." aria-label="Message" contenteditable @ref=TextArea @onkeydown=HandleEnter @onkeydown:preventDefault="preventDefault">
+                <div id="chat-textarea" placeholder="Speak anytime..." aria-label="Message" contenteditable @ref=TextArea @onkeydown=HandleEnter>
                 </div>
             }
         </div>
         @if (!VoiceMode)
         {
-            <div class="form-btns">
-                <button id="submit-btn" class="send-btn icon-btn" disabled=@enableSendBtn) type=submit><SendIcon /></button>
-            </div>
+            if (string.IsNullOrEmpty(Text) || string.IsNullOrWhiteSpace(Text))
+            {
+                <div class="form-btns">
+                    <button id="submit-btn" class="send-btn icon-btn" type=submit disabled><SendIcon /></button>
+                </div>
+            } else
+            {
+                <div class="form-btns">
+                    <button id="submit-btn" class="send-btn icon-btn" type=submit><SendIcon /></button>
+                </div>
+            }
         } 
         else
         {
@@ -30,7 +37,7 @@
 </footer>
 
 <script>
-    document.querySelector("chat-textarea").addEventListener("keydown", function(event) {
+    document.getElementById("chat-textarea").addEventListener("keydown", function(event) {
       // Check if the pressed key is Enter (keyCode 13 or key "Enter")
       if (event.key === "Enter" || event.keyCode === 13) {
         // Check if the Shift key is NOT pressed
@@ -52,10 +59,9 @@
     }
 
     function setText(event, ref, elem) {
-        event.preventDefault();
         var text = getInnerText(ref, elem);
-        ref.invokeMethodAsync("SetText", text);
         //console.log(text);
+        ref.invokeMethodAsync("SetText", text);
     }
 
     function initiateMessage(ref, elem) {
@@ -81,7 +87,6 @@
     string? Transcription;
     bool preventDefault = false;
     ElementReference TextArea;
-    bool enableSendBtn = false;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -105,40 +110,17 @@
 
     void HandleEnter(KeyboardEventArgs? args)
     {
-        Js.InvokeVoidAsync("setText", args, DotNetObjectReference.Create(this), TextArea);
-
-        if (string.IsNullOrEmpty(Text))
-        {
-            enableSendBtn = false;
-            Console.WriteLine("Text is empty, disabling send button.");
-        } else
-        {
-            enableSendBtn = true;
-            Console.WriteLine("Text is not empty, enabling send button.");
-        }
-
         if (args?.Code == "Enter" && !args.ShiftKey)
         {
             preventDefault = true;
             InitiateMessage();
         }
-        else
+        else if (args?.Code == "Enter" && args.ShiftKey)
         {
             preventDefault = false;
-        }
-    }
-
-    private async Task<string> GetStringFromJs()
-    {
-        var innerText = await Js.InvokeAsync<string>("getInnerHtml", "chat-textarea");
-
-        if (innerText != null)
+        } else
         {
-            return innerText;
-        }
-        else
-        {
-            return string.Empty;
+            Js.InvokeVoidAsync("setText", args, DotNetObjectReference.Create(this), TextArea);
         }
     }
 
@@ -146,7 +128,12 @@
     public void SetText(string text)
     {
         Text = text;
-        StateHasChanged();
+
+        if (string.IsNullOrEmpty(Text) || string.IsNullOrWhiteSpace(Text))
+        {
+            Text = string.Empty;
+            StateHasChanged();
+        }
     }
 
     [JSInvokable("SendMessage")]
