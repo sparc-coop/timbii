@@ -49,7 +49,7 @@ public class Room : BlossomEntity<string>
     public string DisplayName => Name ?? Summary?.Name ?? CalculateNameFromMembers();
     public string? Alias { get; set; }
     public string? Topic { get; set; }
-    public JoinTypes JoinRule { get; set;  }
+    public JoinTypes JoinRule { get; set; }
 
     public RoomTypes Type { get; set; } = RoomTypes.Chat;
 
