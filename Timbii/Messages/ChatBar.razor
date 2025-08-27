@@ -1,7 +1,10 @@
 ﻿<footer class="chat-bar">
     <div class="left-btns">
         <button class="attach-btn icon-btn" @onclick=OpenUpload><FileUploadIcon /></button>
-        <button class="live-btn icon-btn" @onclick=ToggleLiveMode><LiveIcon IsActive=liveMode /></button>
+        @if (!voiceMode)
+        {
+            <button class="live-btn icon-btn" @onclick=ToggleLiveMode><LiveIcon IsActive=liveMode /></button>
+        }
     </div>
     <form id="chat-form" @onsubmit=InitiateMessage>
         @if (!liveMode)
