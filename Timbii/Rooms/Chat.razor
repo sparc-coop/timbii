@@ -25,9 +25,6 @@
     BlossomUser? User { get; set; }
     List<TextMessage> Messages = [];
     MatrixRoomSummary? Room { get; set; }
-    string? Since;
-
-    PeriodicTimer? EverySecondPoller;
 
     bool voiceMode = false;
     bool messageSent = false;
@@ -56,8 +53,8 @@
 
     private async Task SyncAsync()
     {
-        var sync = await Chats.SyncAsync(Since);
-        Messages.AddRange(sync.Rooms.Join[RoomId].Timeline.Events.OfType<MatrixEvent<MatrixMessage>>());
+        // var sync = await Chats.SyncAsync(Since);
+        // Messages.AddRange(sync.Rooms.Join[RoomId].Timeline.Events.OfType<MatrixEvent<MatrixMessage>>());
     }
 
     private async Task SendMessage(string messageText)

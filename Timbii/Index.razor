@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Ardalis.Specification
 
 <PageTitle>Home</PageTitle>
 
@@ -30,7 +31,7 @@
                     @foreach (var room in Rooms)
                     {
                         <tr>
-                            <td @onclick="() => GoToRoom(room)">@(room.Name ?? room.RoomId.Substring(0, 8))</td>
+                            <td @onclick="() => GoToRoom(room)">@(room.Name ?? room.Id.Substring(0, 8))</td>
                             @if (UserIsInRoom(room))
                             {
                                 <td>
@@ -60,9 +61,17 @@
 
 
 @inject NavigationManager Nav
+@inject IRepository<Room> RoomsRepo;
 @code {
     private string? RoomId { get; set; }
-    private List<MatrixRoomSummary> Rooms = [];
+    private List<Room> Rooms = [];
+
+    class GetAllRoomsSpec : Specification<Room>
+    {
+        public GetAllRoomsSpec()
+        {
+        }
+    }
 
     protected async override Task OnInitializedAsync()
     {
@@ -71,13 +80,12 @@
 
     private async Task GetAllRooms()
     {
-        var response = await Chats.GetPublicRoomsAsync();
-        Rooms = response.Chunk;
+        Rooms = await RoomsRepo.GetAllAsync(new GetAllRoomsSpec());
     }
 
-    private void GoToRoom(MatrixRoomSummary room)
+    private void GoToRoom(Room room)
     {
-        Nav.NavigateTo("/chats/" + room.LocalId);
+        Nav.NavigateTo("/chats/" + room.Id);
     }
 
     private void GoToCreateRoom()
@@ -85,24 +93,18 @@
         Nav.NavigateTo("/chats/new");
     }
 
-    private async Task JoinRoom(MatrixRoomSummary room)
+    private async Task JoinRoom(Room room)
     {
-        await Chats.JoinRoomAsync(room.RoomId);
+        await Chats.JoinRoomAsync(room.Id);
         await GetAllRooms();
         StateHasChanged();
     }
 
-    private async Task LeaveRoom(MatrixRoomSummary room)
+    private async Task LeaveRoom(Room room)
     {
-        await Chats.LeaveRoomAsync(room.RoomId);
+        await Chats.LeaveRoomAsync(room.Id);
         await GetAllRooms();
         StateHasChanged();
-        var response = await Chats.GetPublicRoomsAsync();
-        Rooms = response.Chunk;
-        if (Rooms.Any())
-        {
-            RoomId = Rooms.First().RoomId;
-        }
     }
 
     async Task Create()
@@ -111,7 +113,7 @@
         Nav.Refresh(true);
     }
 
-    private bool UserIsInRoom(MatrixRoomSummary room)
+    private bool UserIsInRoom(Room room)
     {
         return true;
     }
