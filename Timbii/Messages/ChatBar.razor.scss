@@ -1,5 +1,6 @@
 .chat-bar {
     width: 100%;
+    height: 58px;
     padding: 8px 12px;
     position: fixed;
     bottom: 0;
@@ -9,7 +10,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
     background: var(--surface-secondary);
     border-radius: 24px 24px 0 0;
     box-shadow: 0 -10px 20px 0 rgba(0, 18, 65, 0.04), 0 -2px 6px 0 rgba(0, 18, 65, 0.04), 0 0 1px 0 rgba(0, 18, 65, 0.04);
@@ -54,25 +55,39 @@
         }
     }
 
+    .left-btns, .right-btns {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 4px;
+    }
+
     button {
-        &.attach-btn {
-            ::deep svg {
-                width: 20px;
-                height: 20px;
-            }
+        width: 32px;
+        height: 32px;
+        aspect-ratio: 1/1;
+        padding: 0;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        ::deep svg {
+            width: 18px;
+            height: auto;
         }
 
         &.send-btn {
-            padding: 4px;
             background: var(--button-primary-normal);
 
             ::deep svg {
-                width: 20px;
-                height: 20px;
-
                 path {
                     stroke: var(--icon-invert)
                 }
+            }
+
+            &:hover {
+                box-shadow: 0px 10px 20px 0px rgba(0, 18, 65, 0.04), 0px 2px 6px 0px rgba(0, 18, 65, 0.04), 0px 0px 1px 0px rgba(0, 18, 65, 0.04);
             }
 
             &:disabled {
@@ -80,16 +95,61 @@
             }
         }
 
-        &.record-btn {
-            background: var(--orange);
+        &.STT-btn, &.textinput-btn {
+            &.active {
+                background: var(--button-primary-normal);
+                box-shadow: 0 0 7px 0 #DB571F;
+            }
+        }
+    }
+
+    .live-container {
+        width: 83px;
+        height: 83px;
+        aspect-ratio: 1/1;
+        //background: var(--surface-secondary);
+        //border-radius: 100px 100px 0 0;
+        position: absolute;
+        top: -28px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .live-background {
+            width: 83px;
+            height: auto;
+            position: absolute;
+            top: 2px;
+            left: 0;
+            z-index: 10;
+        }
+
+        .live-indicator {
+            width: 64px;
+            height: 64px;
+            aspect-ratio: 1/1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: none;
+            border-radius: 50%;
+            border: 1px solid var(--button-primary-border, rgba(219, 87, 31, 0.20));
+            z-index: 20;
 
             ::deep svg {
-                width: 14px;
-                height: 14px;
+                width: 24px;
+                height: 24px;
+            }
 
-                path {
-                    stroke: white;
-                }
+            &.recording {
+                background: var(--button-primary-normal);
+                box-shadow: 0 0 7px 0 #DB571F;
+            }
+
+            &.disabled {
+                opacity: 0.5;
             }
         }
     }

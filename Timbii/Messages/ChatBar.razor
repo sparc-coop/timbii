@@ -1,39 +1,48 @@
 ﻿<footer class="chat-bar">
-    <div class="attach-btns">
-        <button class="attach-btn icon-btn"><PlusIcon /></button>
+    <div class="left-btns">
+        <button class="attach-btn icon-btn" @onclick=OpenUpload><FileUploadIcon /></button>
+        <button class="live-btn icon-btn" @onclick=ToggleLiveMode><LiveIcon IsActive=liveMode /></button>
     </div>
     <form id="chat-form" @onsubmit=InitiateMessage>
-        <div class="chat-input">
-            @if (!VoiceMode)
-            {
-                @* <textarea id="chat-textarea" type="text" rows="1" @bind=Text placeholder="Type your message..." oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' style="@(string.IsNullOrEmpty(Text) ? "height: fit-content;" : "")" @ref=TextArea @onkeydown=InitiateMessage @onkeydown:preventDefault="preventDefault" /> *@
-                <div id="chat-textarea" data-text="Type to send messages..." aria-label="Message" contenteditable  @ref=TextArea @onkeydown=HandleEnter>
-                </div>
-            } else
-            {
-                <div id="chat-textarea" placeholder="Speak anytime..." aria-label="Message" contenteditable @ref=TextArea @onkeydown=HandleEnter>
-                </div>
-            }
-        </div>
-        @if (!VoiceMode)
+        @if (!liveMode)
         {
-            if (string.IsNullOrEmpty(Text) || string.IsNullOrWhiteSpace(Text))
-            {
-                <div class="form-btns">
+            <div class="chat-input">
+                @if (!voiceMode)
+                {
+                    <div id="chat-textarea" data-text="Type to send messages..." aria-label="Message" contenteditable @ref=TextArea @onkeydown=HandleEnter>
+                    </div>
+                }
+                else
+                {
+                    <div id="chat-textarea" data-text="Speak anytime..." aria-label="Voice Message" contenteditable @ref=TextArea @onkeydown=HandleEnter>
+                    </div>
+                }
+            </div>
+            <div class="right-btns">
+                @if (string.IsNullOrEmpty(Text) || string.IsNullOrWhiteSpace(Text))
+                {
                     <button id="submit-btn" class="send-btn icon-btn" type=submit disabled><SendIcon /></button>
-                </div>
-            } else
-            {
-                <div class="form-btns">
+                } else {
                     <button id="submit-btn" class="send-btn icon-btn" type=submit><SendIcon /></button>
-                </div>
-            }
-        } 
-        else
+                }
+                <button id="STT-btn" class="STT-btn icon-btn @(voiceMode ? "active" : "")" @onclick=ToggleVoiceMode><STTIcon IsActive=voiceMode /></button>
+            </div>
+        } else
         {
-            <button id="send-btn" class="record-btn icon-btn" type=submit><MicrophoneIcon /></button>
+            <div class="live-container">
+                <svg class="live-background" width="91" height="29" viewBox="0 0 91 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M45.3418 0.284668C61.5903 0.284668 75.6492 9.65184 82.418 23.2798C83.8962 26.2559 86.7294 28.45 90.0195 28.604H0.664062C3.95417 28.45 6.78744 26.2559 8.26562 23.2798C15.0344 9.65184 29.0933 0.284669 45.3418 0.284668Z" fill="#F7F6EF" />
+                </svg>
+                <div id="live-indicator" class="live-indicator @(isRecording ? "recording" : "") @(liveTextMode ? "disabled" : "")"><STTIcon IsLive=liveMode IsRecording=isRecording /></div>
+            </div>
         }
     </form>
+    @if (liveMode)
+    {
+        <div class="right-btns">
+            <button id="textinput-btn" class="textinput-btn icon-btn @(liveTextMode ? "active" : "")" @onclick=ToggleLiveTextMode><TextInputIcon IsActive=@liveTextMode /></button>
+        </div>
+    }
 </footer>
 
 <script>
@@ -79,7 +88,6 @@
 </script>
 
 @code {
-    [Parameter] public bool VoiceMode { get; set; } = false;
     [Parameter] public EventCallback<string> OnSendMessage { get; set; }
     [Parameter] public bool MessageSent { get; set; } = false;
 
@@ -87,6 +95,12 @@
     string? Transcription;
     bool preventDefault = false;
     ElementReference TextArea;
+    bool textMode = true;
+    bool voiceMode = false;
+    bool liveMode = false;
+    bool isRecording = false;
+    bool liveTextMode = false;
+    bool showUpload = false;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -98,7 +112,7 @@
 
     void InitiateMessage()
     {
-        if (!VoiceMode)
+        if (!voiceMode)
         {
             Js.InvokeVoidAsync("initiateMessage", DotNetObjectReference.Create(this), TextArea);
         }
@@ -139,7 +153,7 @@
     [JSInvokable("SendMessage")]
     public async void SendMessage(string text)
     {
-        if (!VoiceMode)
+        if (!voiceMode)
         {
             Text = text?.Trim('\r', '\n', ' ');
 
@@ -160,6 +174,37 @@
             // if (SelectedMessage != null && OnDoneEditing.HasDelegate)
             //     await OnDoneEditing.InvokeAsync(newMessage);
         }
+    }
+
+    void OpenUpload()
+    {
+        showUpload = !showUpload;
+    }
+
+    void ToggleTextMode()
+    {
+        textMode = !textMode;
+        voiceMode = false;
+        liveMode = false;
+    }
+
+    void ToggleVoiceMode()
+    {
+        voiceMode = !voiceMode;
+        textMode = false;
+        liveMode = false;
+    }
+
+    void ToggleLiveMode()
+    {
+        liveMode = !liveMode;
+        textMode = false;
+        voiceMode = false;
+    }
+
+    void ToggleLiveTextMode()
+    {
+        liveTextMode = !liveTextMode;
     }
 
     void RecordVoiceMessage()

@@ -14,7 +14,6 @@
         </div>
     </div>
     <div class="right chat-actions">
-        <button class="voice-btn icon-btn" @onclick=ToggleVoiceMode><VoiceModeIcon VoiceMode=voiceMode /></button>
         <SparcAura>
             <Presence Avatar="context" />
         </SparcAura>
@@ -33,7 +32,7 @@
     </div>
 </main>
 
-<ChatBar OnSendMessage=SendMessage VoiceMode=@voiceMode MessageSent=messageSent />
+<ChatBar OnSendMessage=SendMessage MessageSent=messageSent />
 
 @code {
     [Parameter] public required string RoomId { get; set; }
@@ -42,7 +41,6 @@
     private List<MatrixEvent<MatrixMessage>> Messages = [];
     private MatrixRoom? Room { get; set; }
 
-    bool voiceMode = false;
     bool messageSent = false;
 
     protected async override Task OnInitializedAsync()
@@ -96,11 +94,6 @@
         {
             return false;
         }
-    }
-
-    void ToggleVoiceMode()
-    {
-        voiceMode = !voiceMode;
     }
 
     private void GoToCreateRoom()
