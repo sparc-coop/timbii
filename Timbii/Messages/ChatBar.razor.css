@@ -77,7 +77,10 @@
   stroke: var(--icon-invert);
 }
 .chat-bar button.send-btn:hover {
-  box-shadow: 0px 10px 20px 0px rgba(0, 18, 65, 0.04), 0px 2px 6px 0px rgba(0, 18, 65, 0.04), 0px 0px 1px 0px rgba(0, 18, 65, 0.04);
+  box-shadow: 0 0 7px 0 #DB571F;
+}
+.chat-bar button.send-btn:active {
+  box-shadow: none;
 }
 .chat-bar button.send-btn:disabled {
   opacity: 0.5;
