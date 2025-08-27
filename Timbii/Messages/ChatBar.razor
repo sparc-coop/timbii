@@ -19,12 +19,7 @@
                 }
             </div>
             <div class="right-btns">
-                @if (string.IsNullOrEmpty(Text) || string.IsNullOrWhiteSpace(Text))
-                {
-                    <button id="submit-btn" class="send-btn icon-btn" type=submit disabled><SendIcon /></button>
-                } else {
-                    <button id="submit-btn" class="send-btn icon-btn" type=submit><SendIcon /></button>
-                }
+                <button id="submit-btn" class="send-btn icon-btn" type=submit disabled="@((string.IsNullOrEmpty(Text) || string.IsNullOrWhiteSpace(Text) ? true : false))"><SendIcon /></button>
                 <button id="STT-btn" class="STT-btn icon-btn @(voiceMode ? "active" : "")" @onclick=ToggleVoiceMode><STTIcon IsActive=voiceMode /></button>
             </div>
         } else
@@ -40,7 +35,7 @@
     @if (liveMode)
     {
         <div class="right-btns">
-            <button id="textinput-btn" class="textinput-btn icon-btn @(liveTextMode ? "active" : "")" @onclick=ToggleLiveTextMode><TextInputIcon IsActive=@liveTextMode /></button>
+            <button id="textinput-btn" class="textinput-btn icon-btn @(liveTextMode ? "active" : "")" disabled="@(isRecording ? true : false)" @onclick=ToggleLiveTextMode><TextInputIcon IsActive=@liveTextMode /></button>
         </div>
     }
 </footer>

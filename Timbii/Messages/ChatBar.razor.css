@@ -85,9 +85,15 @@
 .chat-bar button.send-btn:disabled {
   opacity: 0.5;
 }
+.chat-bar button.send-btn:disabled:hover {
+  box-shadow: none;
+}
 .chat-bar button.STT-btn.active, .chat-bar button.textinput-btn.active {
   background: var(--button-primary-normal);
   box-shadow: 0 0 7px 0 #DB571F;
+}
+.chat-bar button.textinput-btn.disabled {
+  opacity: 0.5;
 }
 .chat-bar .live-container {
   width: 83px;

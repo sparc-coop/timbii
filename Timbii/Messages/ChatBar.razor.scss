@@ -96,6 +96,10 @@
 
             &:disabled {
                 opacity: 0.5;
+
+                &:hover {
+                    box-shadow: none;
+                }
             }
         }
 
@@ -103,6 +107,12 @@
             &.active {
                 background: var(--button-primary-normal);
                 box-shadow: 0 0 7px 0 #DB571F;
+            }
+        }
+
+        &.textinput-btn {
+            &.disabled {
+                opacity: 0.5;
             }
         }
     }
