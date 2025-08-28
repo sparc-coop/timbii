@@ -1,0 +1,73 @@
+﻿.recent-message-card:hover header h5 {
+  transition: 0.2s ease-in-out;
+  color: var(--primary-900);
+}
+.recent-message-card:hover header aside {
+  transition: 0.2s ease-in-out;
+  color: var(--primary-800);
+}
+.recent-message-card:hover .message-content {
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+  box-shadow: 0px 10px 20px 0px rgba(0, 18, 65, 0.04), 0px 2px 6px 0px rgba(0, 18, 65, 0.04), 0px 0px 1px 0px rgba(0, 18, 65, 0.04);
+}
+.recent-message-card header {
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.recent-message-card header .left {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: 4px;
+}
+.recent-message-card header .left ::deep svg {
+  width: 16px;
+  height: 8px;
+  margin-top: 12px;
+}
+.recent-message-card header h5 {
+  color: var(--text-primary, #2C2920);
+  leading-trim: both;
+  text-edge: cap;
+  /* Body/small/Regular */
+  font-family: Halcom;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 16.8px */
+  letter-spacing: -0.14px;
+}
+.recent-message-card header aside {
+  color: var(--text-secondary, #4F4B40);
+  leading-trim: both;
+  text-edge: cap;
+  /* Body/Extra small/Regular */
+  font-family: Halcom;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 14.4px */
+  letter-spacing: -0.24px;
+}
+.recent-message-card .message-content {
+  padding: 16px;
+  border-radius: 24px;
+  background: var(--surface-secondary, #F7F6EF);
+}
+.recent-message-card .message-content p {
+  color: var(--input-text, #2C2920);
+  leading-trim: both;
+  text-edge: cap;
+  /* Body/small/Regular */
+  font-family: Halcom;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 16.8px */
+  letter-spacing: -0.14px;
+}

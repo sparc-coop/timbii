@@ -1,11 +1,11 @@
-﻿@page "/friends/new"
+﻿@page "/new-friend"
 @layout AppLayout
 
 <PageTitle>Add Friend</PageTitle>
 
 <TopBar Page="add-friend" Styles="height-80 cols-2">
     <div class="left">
-        <button class="back-btn icon-btn" @onclick='() => Nav.NavigateTo("/chats/new")'><ArrowLeftIcon Color="#7A7A7A" /></button>
+        <button class="back-btn icon-btn" @onclick='() => Nav.NavigateTo("/chats/new")'><ChevronLeftIcon /></button>
         <h2>Add Friend</h2>
     </div>
     <div class="right">

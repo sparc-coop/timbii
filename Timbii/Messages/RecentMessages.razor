@@ -1,0 +1,104 @@
+﻿@page "/friends/{Friend}/messages"
+@layout AppLayout
+
+<TopBar Page="recent-messages" Styles="height-80 cols-2">
+    <div class="left">
+        <button class="back-btn icon-btn" @onclick='() => Nav.NavigateTo("/friends")'><ChevronLeftIcon /></button>
+    </div>
+    <div class="right">
+        <button class="star-btn icon-btn" @onclick=ToggleStar><StarIcon IsStarred=IsStarred /></button>
+        <button class="more-btn icon-btn"><MenuIcon /></button>
+        <SparcAura>
+            <Presence Avatar="context" />
+        </SparcAura>
+    </div>
+</TopBar>
+
+<main>
+    <div class="user">
+        <div class="user-img">
+            <img class="avatar" src="images/avatar2.svg" />
+        </div>
+        <div class="user-info">
+            <h3>Friend's Name</h3>
+            <p>Short Status Message</p>
+        </div>
+        <div class="user-language">
+            <GlobeIcon />
+            <p>Language</p>
+        </div>
+        <div class="user-bio">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+        </div>
+    </div>
+    <div class="messages-container">
+        @if (Messages.Count < 1)
+        {
+            <h4>No message history with @Friend</h4>
+        } else if (Messages.Count == 1)
+        {
+            <h4>Recent message from @Friend</h4>
+        } else
+        {
+            <h4>Recent messages from @Friend</h4>
+        }
+
+        <ul class="messages-list">
+            @foreach (var message in Messages)
+            {
+                <li><RecentMessageCard Message=message /></li>
+            }
+        </ul>
+    </div>
+</main>
+
+@code {
+    [Parameter] public string Friend { get; set; }
+    //private List<MatrixEvent<MatrixMessage>> Messages = [];
+
+    public class RecentMessage
+    {
+        public string Text { get; set; }
+        public string Type { get; set; }
+        public string RoomId { get; set; }
+        public DateTime Timestamp { get; set; }
+    }
+
+    private List<RecentMessage> Messages = new List<RecentMessage>();
+    bool IsStarred;
+
+    protected override void OnInitialized()
+    {
+        Messages.Add(new RecentMessage
+        {
+            Text = "Curabitur tempor quis eros tempus lacinia. Nam bibendum pellentesque quam a convallis. Sed ut vulputate nisi. Integer in felis sed leo vestibulum venenatis. Suspendisse quis arcu sem. Aenean feugiat ex eu vestibulum vestibulum.",
+            Type = "Direct message",
+            RoomId = "Test",
+            Timestamp = DateTime.UtcNow.AddHours(-2)
+        });
+
+        Messages.Add(new RecentMessage
+        {
+            Text = "Curabitur tempor quis eros tempus lacinia. Nam bibendum pellentesque quam a convallis. Sed ut vulputate nisi. Integer in felis sed leo vestibulum venenatis. Suspendisse quis arcu sem. Aenean feugiat ex eu vestibulum vestibulum.",
+            Type = "Mutual chat room name",
+            RoomId = "Test",
+            Timestamp = DateTime.UtcNow.AddHours(-4)
+        });
+
+        Messages.Add(new RecentMessage
+        {
+            Text = "Curabitur tempor quis eros tempus lacinia. Nam bibendum pellentesque quam a convallis. Sed ut vulputate nisi. Integer in felis sed leo vestibulum venenatis. Suspendisse quis arcu sem. Aenean feugiat ex eu vestibulum vestibulum.",
+            Type = "Direct message",
+            RoomId = "Test",
+            Timestamp = DateTime.UtcNow.AddHours(8)
+        });
+
+        Messages.OrderBy(x => x.Timestamp);
+    }
+
+    void ToggleStar()
+    {
+        IsStarred = !IsStarred;
+    }
+
+}

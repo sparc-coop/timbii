@@ -87,6 +87,11 @@ main .friends-list .friend-requests, main .friends-list .all-friends {
   max-height: fit-content;
   width: 100%;
 }
+main .friends-list .friend-requests ul, main .friends-list .all-friends ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 main .friends-list .friend-requests.collapsed, main .friends-list .all-friends.collapsed {
   max-height: 44px;
   overflow: hidden;

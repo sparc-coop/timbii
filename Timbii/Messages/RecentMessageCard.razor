@@ -1,0 +1,22 @@
+﻿<div class="recent-message-card">
+    <header>
+        <div class="left">
+            <CurveTopLeft />
+            <h5>@Message.Type</h5>
+        </div>
+        <div class="right">
+            @* <aside>@DateTimeOffset.FromUnixTimeMilliseconds(Message.OriginServerTs).ToLocalTime().ToString("HH:mm")</aside> *@
+            <aside>@Message.Timestamp.ToShortTimeString()</aside>
+        </div>
+    </header>
+    <div class="message-content">
+        @* <p>@Message.Content.Body</p> *@
+        <p>@Message.Text</p>
+    </div>
+</div>
+
+@code {
+    //[Parameter] public MatrixEvent<MatrixMessage> Message { get; set; }
+
+    [Parameter] public RecentMessages.RecentMessage Message { get; set; }
+}

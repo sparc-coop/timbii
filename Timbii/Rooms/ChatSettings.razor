@@ -3,7 +3,7 @@
 
 <TopBar Styles="height-80 cols-2">
     <div class="left">
-        <button class="back-btn icon-btn" @onclick='() => Nav.NavigateTo($"/chats/{RoomId}")'><ArrowLeftIcon Color="#7A7A7A" /></button>
+        <button class="back-btn icon-btn" @onclick='() => Nav.NavigateTo($"/chats/{RoomId}")'><ChevronLeftIcon /></button>
     </div>
     <div class="right chat-actions">
         <button class="star-btn icon-btn" @onclick=ToggleStar><StarIcon IsStarred=IsStarred /></button>

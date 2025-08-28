@@ -5,11 +5,11 @@
 
 <TopBar Page="new-chat" Styles="height-80 cols-2">
     <div class="left">
-        <button class="back-btn icon-btn" @onclick='() => Nav.NavigateTo("/chats")'><ArrowLeftIcon Color="#7A7A7A" /></button>
+        <button class="back-btn icon-btn" @onclick='() => Nav.NavigateTo("/chats")'><ChevronLeftIcon /></button>
         <h2>Start New Chat</h2>
     </div>
     <div class="right">
-        <button class="add-btn icon-btn" @onclick='() => Nav.NavigateTo("/friends/new")'><UserAddIcon /></button>
+        <button class="add-btn icon-btn" @onclick='() => Nav.NavigateTo("/new-friend")'><UserAddIcon /></button>
         <SparcAura>
             <Presence Avatar="context" />
         </SparcAura>

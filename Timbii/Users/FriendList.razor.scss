@@ -99,6 +99,12 @@ main {
             max-height: fit-content;
             width: 100%;
 
+            ul {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
             &.collapsed {
                 max-height: 44px;
                 overflow: hidden;

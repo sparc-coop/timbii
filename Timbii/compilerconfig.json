@@ -64,6 +64,14 @@
     "inputFile": "Messages/MessageGroup.razor.scss"
   },
   {
+    "outputFile": "Messages/RecentMessages.razor.css",
+    "inputFile": "Messages/RecentMessages.razor.scss"
+  },
+  {
+    "outputFile": "Messages/RecentMessageCard.razor.css",
+    "inputFile": "Messages/RecentMessageCard.razor.scss"
+  },
+  {
     "outputFile": "Users/FriendCard.razor.css",
     "inputFile": "Users/FriendCard.razor.scss"
   },
