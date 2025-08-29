@@ -19,7 +19,7 @@
     {
         <div class="search-bar friends-search">
             <SearchIcon />
-            <input type="text" placeholder="Search" />
+            <input type="text" placeholder="Search" @bind=@searchTerm @bind:after=SearchFriends />
         </div>
     }
     <article class="friends-list">
@@ -40,11 +40,11 @@
         }
         <div class="all-friends  @(collapseAll ? "collapsed" : "")">
             <header>
-                <h3>All Friends <span>@Friends.Count()</span></h3>
+                <h3>All Friends <span>@FilteredFriends.Count()</span></h3>
                 <button class="icon-btn collapse-btn" @onclick='() => ToggleList("all")'><ChevronDownIcon /></button>
             </header>
             <ul>
-                @foreach (var friend in Friends)
+                @foreach (var friend in FilteredFriends)
                 {
                     <li @key=friend><FriendCard Friend=@friend Page="friends-page" List="all" /></li>
                 }
@@ -57,10 +57,12 @@
 
 @code {
     List<string> Friends = [];
+    List<string> FilteredFriends = [];
     List<string> FriendRequests = [];
     bool showSearch;
     bool collapseAll;
     bool collapseRequests;
+    string searchTerm = string.Empty;
 
     protected async override Task OnInitializedAsync()
     {
@@ -72,6 +74,7 @@
         Friends.Add("Ana");
 
         Friends = Friends.OrderBy(f => f).ToList();
+        FilteredFriends = Friends;
 
         FriendRequests.Add("John Doe");
         FriendRequests.Add("Jane Smith");
@@ -103,5 +106,17 @@
     void IgnoreUser(string friend)
     {
         FriendRequests.Remove(friend);
+    }
+
+    void SearchFriends()
+    {
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            FilteredFriends = Friends.Where(x => x.ToLower().Contains(searchTerm.ToLower())).ToList();
+        }
+        else
+        {
+            FilteredFriends = Friends;
+        }
     }
 }

@@ -416,7 +416,7 @@ form label select option {
   width: 100%;
   display: flex;
   height: var(--input-height, 64px);
-  padding: 8px var(--button-border-large, 20px);
+  padding: 16px var(--button-border-large, 20px);
   align-items: center;
   gap: 12px;
   align-self: stretch;
@@ -429,7 +429,6 @@ form label select option {
 }
 .search-bar input {
   width: 100%;
-  height: 48px;
   color: var(--input-text, #2C2920);
   leading-trim: both;
   text-edge: cap;
