@@ -32,18 +32,16 @@ function handleEnter(e) {
 }
 
 function scrollToLastMessage() {
-    //var messages = document.querySelectorAll(".message-container");
-    //var last;
-    //if (messages.length > 0) {
-    //    last = messages[messages.length - 1];
-    //}
-    //if (last != null) {
-    //    last.scrollIntoView();
+    //var elem = document.querySelector(".message-container:last-of-type");
+    //if (elem != null) {
+    //    //last.scrollTop({ behavior: "smooth", block: "end", inline: "nearest" });
+
+    //    var rect = elem.getBoundingClientRect();
+    //    window.scrollTo(0, rect);
     //}
 
-    //document.querySelector(".message-container:last-of-type");
     var last = document.querySelector(".message-container:last-of-type");
     if (last != null) {
-        last.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+        last.scrollIntoView({ behavior: "instant", block: "end", inline: "nearest" });
     }
 }
