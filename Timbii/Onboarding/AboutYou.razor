@@ -11,7 +11,7 @@
         </div>
         <div class="user-language">
             <GlobeIcon />
-            <p>Language</p>
+            <p>@(User != null ? User.Avatar.Language.DisplayName : "Language")</p>
         </div>
     </div>
     <form>
@@ -34,5 +34,7 @@
 </BottomBar>
 
 @code {
+    [CascadingParameter] public BlossomUser? User { get; set; }
+
     string Name;
 }

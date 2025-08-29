@@ -16,7 +16,7 @@
 </div>
 
 @code {
-    [Parameter] public BlossomUser? User {get; set;}
+    [CascadingParameter] public BlossomUser? User { get; set; }
     [Parameter] public required MatrixRoom Room { get; set; }
 
     List<MatrixEvent<MatrixMessage>> Messages = [];

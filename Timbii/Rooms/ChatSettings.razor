@@ -54,16 +54,15 @@
 </main>
 
 @code {
+    [CascadingParameter] public BlossomUser? User { get; set; }
     [Parameter] public required string RoomId { get; set; }
 
-    BlossomUser? User { get; set; }
     private MatrixRoom? Room { get; set; }
     List<string> Participants = [];
     bool IsStarred;
 
     protected async override Task OnInitializedAsync()
     {
-        User = await Aura.UserInfo();
         Participants.Add(User.Id);
     }
 

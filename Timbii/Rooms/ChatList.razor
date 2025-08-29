@@ -34,7 +34,7 @@
         {
             @foreach (var room in FilteredRooms)
             {
-                <ChatCard User=User Room=room />
+                <ChatCard Room=room />
             }
         }
     </div>
@@ -44,7 +44,8 @@
 
 @inject NavigationManager Nav
 @code {
-    BlossomUser? User { get; set; }
+    [CascadingParameter] public BlossomUser? User { get; set; }
+
     private string? RoomId { get; set; }
     private List<MatrixRoom> Rooms = [];
     private List<MatrixRoom> FilteredRooms = [];
@@ -120,7 +121,7 @@
         if (!string.IsNullOrEmpty(searchTerm))
         {
             FilteredRooms = Rooms.Where(x => (x.Name != null && x.Name.Contains(searchTerm)) || x.RoomId.Contains(searchTerm)).ToList();
-    } else
+        } else
         {
             FilteredRooms = Rooms;
         }

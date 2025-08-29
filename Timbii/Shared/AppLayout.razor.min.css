@@ -1,1 +1,1 @@
-﻿.layout-container{width:100vw;height:100vh;position:relative;background:var(--surface-secondary);}::deep .account-dialog{position:fixed;}
+﻿.layout-container{width:100vw;height:100vh;position:relative;background:var(--surface-secondary);overflow:auto;}::deep .account-dialog{position:fixed;}

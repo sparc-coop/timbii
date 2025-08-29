@@ -7,14 +7,38 @@
     </header>
     <div class="search-bar language-search">
         <SearchIcon />
-        <input type="text" placeholder="Search" />
+        <input type="text" placeholder="Search" @bind=@searchTerm @bind:after=SearchLanguages />
     </div>
+    @if (SelectedLanguage != null)
+    {
+        <div class="selected-language">
+            <div class="left">
+                <h3>@SelectedLanguage.DisplayName</h3>
+                <p>@SelectedLanguage.NativeName</p>
+            </div>
+            <div class="right">
+                <aside class="check-container">
+                    <CheckIcon />
+                </aside>
+            </div>
+        </div>
+    }
     <ul>
-        @foreach (var language in Languages)
+        @foreach (var language in FilteredLanguages)
         {
-            <li>
-                <h3>@language.Key</h3>
-                <p>@language.Value</p>
+            <li @key=language.Id class="@(SelectedLanguage == language ? "selected" : "")" @onclick='() => UpdateLanguage(language)'>
+                <div class="left">
+                    <h3>@language.DisplayName</h3>
+                    <p>@language.NativeName</p>
+                </div>
+                <div class="right">
+                    @if (SelectedLanguage == language)
+                    {
+                        <aside class="check-container">
+                            <CheckIcon />
+                        </aside>
+                    }
+                </div>
             </li>
         }
     </ul>
@@ -26,14 +50,51 @@
 </BottomBar>
 
 @code {
-    Dictionary<string, string> Languages = new Dictionary<string, string>();
+    [CascadingParameter] public BlossomUser? User { get; set; }
 
-    protected override void OnInitialized()
+    IEnumerable<Language> Languages { get; set; } = [];
+    IEnumerable<Language> FilteredLanguages = [];
+    Language? SelectedLanguage;
+    string searchTerm = string.Empty;
+
+    //Dictionary<string, string> Languages = new Dictionary<string, string>();
+
+    protected override async Task OnInitializedAsync()
     {
-        Languages.Add("English", "Hello");
-        Languages.Add("Spanish", "Hola");
-        Languages.Add("French", "Bonjour");
-        Languages.Add("Italian", "Ciao");
-        Languages.Add("Portuguese", "Olá");
+        Languages = await Tovik.GetLanguages();
+        FilteredLanguages = Languages;
+        SelectedLanguage = User?.Avatar.Language;
+        if (SelectedLanguage == null)
+        {
+            SelectedLanguage = Languages.FirstOrDefault(l => l.Id == "en");
+        }
+    }
+
+    // protected override void OnInitialized()
+    // {
+    // Languages.Add("English", "Hello");
+    // Languages.Add("Spanish", "Hola");
+    // Languages.Add("French", "Bonjour");
+    // Languages.Add("Italian", "Ciao");
+    // Languages.Add("Portuguese", "Olá");
+    // }
+
+    void UpdateLanguage(Language language)
+    {
+        SelectedLanguage = language;
+        if (User != null) User.Avatar.Language = SelectedLanguage;
+        StateHasChanged();
+    }
+
+    void SearchLanguages()
+    {
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            FilteredLanguages = Languages.Where(x => (x.Id.ToLower().Contains(searchTerm.ToLower()) || x.DisplayName.ToLower().Contains(searchTerm.ToLower())) || x.NativeName.ToLower().Contains(searchTerm.ToLower()));
+        }
+        else
+        {
+            FilteredLanguages = Languages;
+        }
     }
 }

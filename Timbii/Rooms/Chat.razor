@@ -35,18 +35,13 @@
 <ChatBar OnSendMessage=SendMessage MessageSent=messageSent />
 
 @code {
+    [CascadingParameter] public BlossomUser? User { get; set; }
     [Parameter] public required string RoomId { get; set; }
 
-    BlossomUser? User { get; set; }
     private List<MatrixEvent<MatrixMessage>> Messages = [];
     private MatrixRoom? Room { get; set; }
 
     bool messageSent = false;
-
-    protected async override Task OnInitializedAsync()
-    {
-        User = await Aura.UserInfo();
-    }
 
     protected override async Task OnParametersSetAsync()
     {

@@ -3,6 +3,7 @@
   height: 100vh;
   position: relative;
   background: var(--surface-secondary);
+  overflow: auto;
 }
 
 ::deep .account-dialog {

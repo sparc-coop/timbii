@@ -87,6 +87,8 @@
     }
 
     &.onboarding-btns {
+        background: var(--surface-secondary);
+
         ::deep button {
             padding: 16px 24px;
             display: flex;

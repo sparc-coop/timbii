@@ -72,6 +72,9 @@
 .bottom-bar.single-btn ::deep button.primary-btn:active {
   background: var(--button-primary-pressed);
 }
+.bottom-bar.onboarding-btns {
+  background: var(--surface-secondary);
+}
 .bottom-bar.onboarding-btns ::deep button {
   padding: 16px 24px;
   display: flex;

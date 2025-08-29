@@ -10,6 +10,8 @@
 @using Sparc.Blossom.Authentication
 @using Sparc.Blossom.Realtime
 @using Sparc.Blossom.Realtime.Matrix
+@using Sparc.Blossom
+@using Sparc.Blossom.Content
 
 @using Timbii
 @using Timbii.Rooms
@@ -21,10 +23,12 @@
 @using Timbii.Shared.Icons
 
 @inject ISparcChat Chats
+@inject ITovik Tovik
 
 @inject IJSRuntime Js
 @inject NavigationManager Nav
 @inject ISparcAura Aura
 
+@using Language = Sparc.Blossom.Content.Language
 @using Room = Sparc.Blossom.Realtime.Matrix.MatrixRoom
 @using Message = Sparc.Blossom.Realtime.Matrix.MatrixMessage

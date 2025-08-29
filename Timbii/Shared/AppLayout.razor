@@ -2,6 +2,17 @@
 
 <PageTitle>Timbii</PageTitle>
 
-<div class="layout-container">
-    @Body
-</div>
+<CascadingValue Value="User">
+    <div class="layout-container">
+        @Body
+    </div>
+</CascadingValue>
+
+@code {
+    protected BlossomUser? User;
+
+    protected async override Task OnInitializedAsync()
+    {
+        User = await Aura.UserInfo();
+    }
+}
