@@ -1,0 +1,117 @@
+﻿@page "/onboarding/tone"
+@layout AppLayout
+
+<main class="onboarding">
+    <header>
+        <h2>Set Your Tone</h2>
+        <div class="example-tone">
+            <div class="avatar">
+                <img src="images/avatar.svg" />
+                <div class="status"></div>
+            </div>
+            <div class="message-card">
+                <h4>Example Tone</h4>
+                <div class="content">
+                    <p>
+                        <MessageBubbleTail />
+                        What do you want to eat for lunch today?
+                    </p>
+                    <aside>10:10AM</aside>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="tone-list tones">
+            <h3>Tone & Formality</h3>
+            <ul>
+                @foreach (var tone in Tones)
+                {
+                    <li @key=tone.Key class="@(Tone == tone.Key ? "selected" : "")" @onclick='() => UpdateTone(tone.Key)'>@tone.Value</li>
+                }
+            </ul>
+        </div>
+        <div class="tone-list lengths">
+            <h3>Sentence Length</h3>
+            <ul>
+                @foreach (var length in SentenceLengths)
+                {
+                    <li @key=length.Key class="@(SentenceLength == length.Key ? "selected" : "")" @onclick='() => UpdateLength(length.Key)'>@length.Value</li>
+                }
+            </ul>
+        </div>
+        <div class="tone-list personalities">
+            <h3>Personality</h3>
+            <ul>
+                @foreach (var personality in Personalities)
+                {
+                    <li @key=personality.Key class="@(Personality == personality.Key ? "selected" : "")" @onclick='() => UpdatePersonality(personality.Key)'>@personality.Value</li>
+                }
+            </ul>
+        </div>
+        <div class="bio">
+            <h3>More About You</h3>
+            <textarea rows="6" placeholder="Tell us a little more about you..." @bind=Bio />
+        </div>
+    </section>
+</main>
+
+<BottomBar Page="onboarding-language" Styles="onboarding-btns">
+    <button class="secondary-btn" @onclick='() => Nav.NavigateTo("/onboarding/language")'>Back</button>
+    <button class="primary-btn" @onclick='() => Nav.NavigateTo("/onboarding/complete")'>Next</button>
+</BottomBar>
+
+@code {
+    [CascadingParameter] public BlossomUser? User { get; set; }
+
+    Dictionary<string, string> Tones = new Dictionary<string, string>()
+    {
+        { "emotional", "🌙 Emotional" },
+        { "warm", "💛 Warm" },
+        { "calm", "🌊  Calm" },
+        { "friendly", "😄 Friendly" },
+        { "casual", "😎 Casual" },
+        { "concise", "✂️ Concise"},
+        { "polite", "🙇 Polite" },
+        { "formal", "🏛️ Formal" }
+    };
+
+    Dictionary<string, string> SentenceLengths = new Dictionary<string, string>()
+    {
+        { "short", "🪶 Short and simple" },
+        { "medium", "📄 Medium" },
+        { "long", "📚 Long and descriptive" }
+    };
+
+    Dictionary<string, string> Personalities = new Dictionary<string, string>()
+    {
+        { "analytical", "🧠 Analytical" },
+        { "honest", "🗣️ Honest" },
+        { "direct", "🔥 Direct" },
+        { "short", "Short" },
+        { "cautious", "🛡 Cautious️" },
+        { "normal", "Normal" },
+        { "long", "Long" },
+        { "humorous", "😆 Humorous" }
+    };
+
+    string Tone = string.Empty;
+    string SentenceLength = string.Empty;
+    string Personality = string.Empty;
+    string Bio = string.Empty;
+
+    void UpdateTone(string tone)
+    {
+        Tone = tone;
+    }
+
+    void UpdateLength(string length)
+    {
+        SentenceLength = length;
+    } 
+
+    void UpdatePersonality(string personality)
+    {
+        Personality = personality;
+    }
+}

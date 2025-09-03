@@ -92,6 +92,10 @@
     "inputFile": "Onboarding/SelectLanguage.razor.scss"
   },
   {
+    "outputFile": "Onboarding/SetTone.razor.css",
+    "inputFile": "Onboarding/SetTone.razor.scss"
+  },
+  {
     "outputFile": "Onboarding/MakeAvatar.razor.css",
     "inputFile": "Onboarding/MakeAvatar.razor.scss"
   },
