@@ -102,5 +102,9 @@
   {
     "outputFile": "Onboarding/AboutYou.razor.css",
     "inputFile": "Onboarding/AboutYou.razor.scss"
+  },
+  {
+    "outputFile": "Onboarding/OnboardingProgress.razor.css",
+    "inputFile": "Onboarding/OnboardingProgress.razor.scss"
   }
 ]

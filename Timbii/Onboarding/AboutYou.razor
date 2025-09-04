@@ -1,35 +1,38 @@
-﻿@page "/onboarding/profile"
+﻿@page "/onboarding/about"
 @layout AppLayout
 
 <main class="onboarding">
+    <OnboardingProgress Step=1 />
     <header>
         <h2>About you</h2>
     </header>
-    <div class="profile">
-        <div class="profile-img">
-            <img class="avatar" src="images/avatar2.svg" />
+    <section>
+        <div class="profile">
+            <div class="profile-img">
+                <img class="avatar" src="images/avatar2.svg" />
+            </div>
+            <div class="user-language">
+                <GlobeIcon />
+                <p>@(User != null ? User.Avatar.Language.DisplayName : "Language")</p>
+            </div>
         </div>
-        <div class="user-language">
-            <GlobeIcon />
-            <p>@(User != null ? User.Avatar.Language.DisplayName : "Language")</p>
-        </div>
-    </div>
-    <form>
-        <label>
-            <span>
-                Status message
-            </span>
-            <input type="text" placeholder="Status message"/>
-        </label>
-        <label>
-            <span>About you</span>
-            <textarea placeholder="Tell us about yourself" rows="6" />
-        </label>
-    </form>
+        <form>
+            <label>
+                <span>
+                    Status message
+                </span>
+                <input type="text" placeholder="Status message"/>
+            </label>
+            <label>
+                <span>About you</span>
+                <textarea placeholder="Tell us about yourself" rows="6" />
+            </label>
+        </form>
+    </section>
 </main>
 
 <BottomBar Page="onboarding-avatar" Styles="onboarding-btns">
-    <button class="secondary-btn" @onclick='() => Nav.NavigateTo("/onboarding/avatar")'>Back</button>
+    <button class="secondary-btn" @onclick='() => Nav.NavigateTo("/onboarding/")'>Back</button>
     <button class="primary-btn" @onclick='() => Nav.NavigateTo("/onboarding/language")'>Next</button>
 </BottomBar>
 

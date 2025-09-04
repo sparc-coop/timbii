@@ -1,19 +1,8 @@
-﻿main {
-  height: 100vh;
-  padding: 16px;
-  padding-top: 32px;
-  padding-bottom: 96px;
+﻿header {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  gap: 20px;
-  background: var(--surface-secondary);
-}
-
-header {
-  width: 100%;
-  margin-bottom: 32px;
+  gap: 24px;
 }
 header h2 {
   color: #000;

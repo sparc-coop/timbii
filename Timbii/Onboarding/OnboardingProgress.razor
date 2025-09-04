@@ -1,15 +1,17 @@
 ﻿<div class="onboarding-progress">
-    @foreach (var step in steps)
+    @foreach (var step in Steps)
     {
-        
+        <div @key=step.Key class="onboarding-step @(step.Key <= Step ? "fill" : "")"></div>
     }
 </div>
 
 @code {
-    List<string> steps = new List<string>
+    [Parameter] public int Step { get; set; } = 1;
+
+    Dictionary<int, string> Steps = new Dictionary<int, string>()
     {
-        "about",
-        "language",
-        "tone"
+        {1, "about"},
+        {2, "language"},
+        {3, "tone"},
     };
 }

@@ -2,50 +2,53 @@
 @layout AppLayout
 
 <main class="onboarding">
+    <OnboardingProgress Step=2 />
     <header>
         <h2>Select Your Language</h2>
-    </header>
-    <div class="search-bar language-search">
-        <SearchIcon />
-        <input type="text" placeholder="Search" @bind=@searchTerm @bind:after=SearchLanguages />
-    </div>
-    @if (SelectedLanguage != null)
-    {
-        <div class="selected-language">
-            <div class="left">
-                <h3>@SelectedLanguage.DisplayName</h3>
-                <p>@SelectedLanguage.NativeName</p>
-            </div>
-            <div class="right">
-                <aside class="check-container">
-                    <CheckIcon />
-                </aside>
-            </div>
+        <div class="search-bar language-search">
+            <SearchIcon />
+            <input type="text" placeholder="Search" @bind=@searchTerm @bind:after=SearchLanguages />
         </div>
-    }
-    <ul>
-        @foreach (var language in FilteredLanguages)
+    </header>
+    <section>
+        @if (SelectedLanguage != null)
         {
-            <li @key=language.Id class="@(SelectedLanguage == language ? "selected" : "")" @onclick='() => UpdateLanguage(language)'>
+            <div class="selected-language">
                 <div class="left">
-                    <h3>@language.DisplayName</h3>
-                    <p>@language.NativeName</p>
+                    <h3>@SelectedLanguage.DisplayName</h3>
+                    <p>@SelectedLanguage.NativeName</p>
                 </div>
                 <div class="right">
-                    @if (SelectedLanguage == language)
-                    {
-                        <aside class="check-container">
-                            <CheckIcon />
-                        </aside>
-                    }
+                    <aside class="check-container">
+                        <CheckIcon />
+                    </aside>
                 </div>
-            </li>
+            </div>
         }
-    </ul>
+        <ul>
+            @foreach (var language in FilteredLanguages)
+            {
+                <li @key=language.Id class="@(SelectedLanguage == language ? "selected" : "")" @onclick='() => UpdateLanguage(language)'>
+                    <div class="left">
+                        <h3>@language.DisplayName</h3>
+                        <p>@language.NativeName</p>
+                    </div>
+                    <div class="right">
+                        @if (SelectedLanguage == language)
+                        {
+                            <aside class="check-container">
+                                <CheckIcon />
+                            </aside>
+                        }
+                    </div>
+                </li>
+            }
+        </ul>
+    </section>
 </main>
 
 <BottomBar Page="onboarding-language" Styles="onboarding-btns">
-    <button class="secondary-btn" @onclick='() => Nav.NavigateTo("/onboarding/profile")'>Back</button>
+    <button class="secondary-btn" @onclick='() => Nav.NavigateTo("/onboarding/about")'>Back</button>
     <button class="primary-btn" @onclick='() => Nav.NavigateTo("/onboarding/tone")'>Next</button>
 </BottomBar>
 

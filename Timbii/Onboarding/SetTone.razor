@@ -2,6 +2,7 @@
 @layout AppLayout
 
 <main class="onboarding">
+    <OnboardingProgress Step=3 />
     <header>
         <h2>Set Your Tone</h2>
         <div class="example-tone">
@@ -27,7 +28,7 @@
             <ul>
                 @foreach (var tone in Tones)
                 {
-                    <li @key=tone.Key class="@(Tone == tone.Key ? "selected" : "")" @onclick='() => UpdateTone(tone.Key)'>@tone.Value</li>
+                    <li @key=tone.Key class="@(Tone == tone.Key ? "selected" : "")" @onclick='() => UpdateTone(tone.Key)' @onclick:preventDefault=true>@tone.Value</li>
                 }
             </ul>
         </div>
@@ -36,7 +37,7 @@
             <ul>
                 @foreach (var length in SentenceLengths)
                 {
-                    <li @key=length.Key class="@(SentenceLength == length.Key ? "selected" : "")" @onclick='() => UpdateLength(length.Key)'>@length.Value</li>
+                    <li @key=length.Key class="@(SentenceLength == length.Key ? "selected" : "")" @onclick='() => UpdateLength(length.Key)' @onclick:preventDefault=true>@length.Value</li>
                 }
             </ul>
         </div>
@@ -45,7 +46,7 @@
             <ul>
                 @foreach (var personality in Personalities)
                 {
-                    <li @key=personality.Key class="@(Personality == personality.Key ? "selected" : "")" @onclick='() => UpdatePersonality(personality.Key)'>@personality.Value</li>
+                    <li @key=personality.Key class="@(Personality == personality.Key ? "selected" : "")" @onclick='() => UpdatePersonality(personality.Key)' @onclick:preventDefault=true>@personality.Value</li>
                 }
             </ul>
         </div>
@@ -58,7 +59,7 @@
 
 <BottomBar Page="onboarding-language" Styles="onboarding-btns">
     <button class="secondary-btn" @onclick='() => Nav.NavigateTo("/onboarding/language")'>Back</button>
-    <button class="primary-btn" @onclick='() => Nav.NavigateTo("/onboarding/complete")'>Next</button>
+    <button class="primary-btn" @onclick='() => Nav.NavigateTo("/chats")'>Next</button>
 </BottomBar>
 
 @code {
@@ -102,16 +103,34 @@
 
     void UpdateTone(string tone)
     {
-        Tone = tone;
+        if (Tone == tone)
+        {
+            Tone = string.Empty;
+        } else
+        {
+            Tone = tone;
+        }
     }
 
     void UpdateLength(string length)
     {
-        SentenceLength = length;
+        if (SentenceLength == length)
+        {
+            SentenceLength = string.Empty;
+        } else
+        {
+            SentenceLength = length;
+        }
     } 
 
     void UpdatePersonality(string personality)
     {
-        Personality = personality;
+        if (Personality == personality)
+        {
+            Personality = string.Empty;
+        } else
+        {
+            Personality = personality;
+        }
     }
 }
