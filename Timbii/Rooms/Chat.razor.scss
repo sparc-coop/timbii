@@ -47,8 +47,20 @@ main {
         display: flex;
         flex-direction: row;
         justify-content: start;
-        align-items: end;
-        gap: 8px;
+        align-items: center;
+        gap: 24px;
+
+        .message-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: end;
+            gap: 8px;
+        }
+
+        &:hover {
+            width: fit-content;
+        }
 
         p {
             width: fit-content;
@@ -84,11 +96,36 @@ main {
             flex-direction: row-reverse;
             justify-content: end;
 
+            .message-content {
+                display: flex;
+                flex-direction: row-reverse;
+                justify-content: start;
+                align-items: end;
+                gap: 8px;
+            }
+
             p {
                 border-radius: 24px 0 24px 24px;
                 background: var(--bubble-user-background);
                 color: var(--bubble-text-inverted);
             }
         }
+    }
+
+    &:hover {
+        ::deep .options-btn {
+            display: flex;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.6;
     }
 }

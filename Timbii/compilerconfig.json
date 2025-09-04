@@ -72,6 +72,10 @@
     "inputFile": "Messages/RecentMessageCard.razor.scss"
   },
   {
+    "outputFile": "Messages/MessageOptions.razor.css",
+    "inputFile": "Messages/MessageOptions.razor.scss"
+  },
+  {
     "outputFile": "Users/FriendCard.razor.css",
     "inputFile": "Users/FriendCard.razor.scss"
   },

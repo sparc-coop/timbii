@@ -154,8 +154,8 @@
   --keyword-border: rgba(79, 75, 64, 0.2);
   --keyword-text-selected: var(--text-invert);
   --keyword-surface-selected: var(--surface-brand);
-  --keyowrd-border-selected: var(--surface-brand-pressed);
-  --keywrod-border-roundness: var(--border-roundness-medium);
+  --keyword-border-selected: var(--surface-brand-pressed);
+  --keyword-border-roundness: var(--border-roundness-medium);
   --progress-awaiting: var(--surface-minimal);
   --progress-working: var(--surface-brand);
   --progress-done: var(--surface-brand);

@@ -45,8 +45,18 @@
   display: flex;
   flex-direction: row;
   justify-content: start;
+  align-items: center;
+  gap: 24px;
+}
+.message-container ::deep .message-card .message-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
   align-items: end;
   gap: 8px;
+}
+.message-container ::deep .message-card:hover {
+  width: fit-content;
 }
 .message-container ::deep .message-card p {
   width: fit-content;
@@ -77,8 +87,28 @@
   flex-direction: row-reverse;
   justify-content: end;
 }
+.message-container.my-message ::deep .message-card .message-content {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: start;
+  align-items: end;
+  gap: 8px;
+}
 .message-container.my-message ::deep .message-card p {
   border-radius: 24px 0 24px 24px;
   background: var(--bubble-user-background);
   color: var(--bubble-text-inverted);
+}
+.message-container:hover ::deep .options-btn {
+  display: flex;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.6;
+  }
 }

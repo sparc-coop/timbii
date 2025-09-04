@@ -1,0 +1,60 @@
+.message-options {
+    width: 100%;
+    padding: 48px 32px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 32px 32px 0 0;
+    background: var(--menu-primary-normal, #F7F6EF);
+    z-index: 40;
+    animation: 0.2s ease-in-out fadeIn;
+
+    ul {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+
+        li {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            align-self: stretch;
+            color: var(--menu-text, #2C2920);
+            leading-trim: both;
+            text-edge: cap;
+            /* Body/Regular/Medium */
+            font-family: Halcom;
+            font-size: 1.6rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 120%; /* 19.2px */
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
+
+            &:active {
+                color: var(--button-primary-pressed);
+            }
+        }
+    }
+}
+
+.modal-overlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(44, 41, 32, 0.50);
+    z-index: 30;
+    animation: 0.2s ease-in-out fadeIn;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

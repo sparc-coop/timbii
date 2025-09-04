@@ -26,7 +26,7 @@
         @foreach (var msg in Messages)
         {
             <div class="message-container @(IsUserMessage(msg.Sender) ? "my-message" : "")">
-                <MessageCard Message=@msg IsMine=IsUserMessage(msg.Sender) />
+                <MessageCard Message=@msg IsMine=IsUserMessage(msg.Sender) OnOptionsClicked=ToggleOptions />
             </div>
         }
     </div>
@@ -34,15 +34,22 @@
 
 <ChatBar OnSendMessage=SendMessage MessageSent=messageSent />
 
+@if (showMessageOptions && (ActiveMessage != null))
+{
+    <MessageOptions Message=ActiveMessage OnClose=ToggleOptions OnViewOriginal=ViewOriginal OnPin=Pin OnCopy=Copy OnSelectAndCopy=SelectAndCopy OnReply=Reply />
+}
+
 @code {
     [CascadingParameter] public BlossomUser? User { get; set; }
     [Parameter] public required string RoomId { get; set; }
 
-    private List<MatrixEvent<MatrixMessage>> Messages = [];
+    private List<Message> Messages = [];
     private MatrixRoom? Room { get; set; }
 
     bool messageSent = false;
     bool showMessages = false;
+    bool showMessageOptions = false;
+    Message ActiveMessage;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -54,7 +61,7 @@
 
             if (Messages.Count > 0)
             {
-                if (!messageSent)
+                if (!messageSent && !showMessageOptions)
                 {
                     await Js.InvokeVoidAsync("scrollToLastMessage", DotNetObjectReference.Create(this), false);
                 }
@@ -66,11 +73,16 @@
     {
         if (Messages.Count > 0)
         {
-            if (messageSent) {
-                await Js.InvokeVoidAsync("scrollToLastMessage", DotNetObjectReference.Create(this), true);
-            } else
+            if (!showMessageOptions)
             {
-                await Js.InvokeVoidAsync("scrollToLastMessage", DotNetObjectReference.Create(this), false);
+                if (messageSent)
+                {
+                    await Js.InvokeVoidAsync("scrollToLastMessage", DotNetObjectReference.Create(this), true);
+                }
+                else
+                {
+                    await Js.InvokeVoidAsync("scrollToLastMessage", DotNetObjectReference.Create(this), false);
+                }
             }
         }
     }
@@ -115,5 +127,36 @@
     private void GoToCreateRoom()
     {
         Nav.NavigateTo("/chats/new");
+    }
+
+    void ToggleOptions(Message message)
+    {
+        showMessageOptions = !showMessageOptions;
+        ActiveMessage = message;
+    }
+
+    void ViewOriginal()
+    {
+        Console.WriteLine("View Original clicked");
+    }
+
+    void Pin()
+    {
+        Console.WriteLine("Pin clicked");
+    }
+
+    void Copy()
+    {
+        Console.WriteLine("Copy clicked");
+    }
+
+    void SelectAndCopy()
+    {
+        Console.WriteLine("Select and Copy clicked");
+    }
+
+    void Reply()
+    {
+        Console.WriteLine("Reply clicked");
     }
 }

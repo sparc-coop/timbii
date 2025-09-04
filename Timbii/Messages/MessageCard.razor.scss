@@ -18,4 +18,23 @@
             right: -8px;
         }
     }
+
+    .options-btn {
+        display: none;
+        width: 40px;
+        height: var(--button-height-medium, 40px);
+        justify-content: center;
+        align-items: center;
+        border-radius: var(--button-border-medium, 16px);
+        background: var(--button-secondary, #4F4B40);
+        opacity: 0.6;
+
+        ::deep svg path {
+            fill: var(--button-text-invert);
+        }
+
+        &:active {
+            opacity: 1;
+        }
+    }
 }

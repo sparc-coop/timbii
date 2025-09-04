@@ -13,15 +13,52 @@
     // need logic for handling long strings
 } *@
 
-<div class="message-card">
-    <p>
-        <MessageBubbleTail IsMine=IsMine />
-        @Message.Content.Body
-    </p>
-    <aside>@DateTimeOffset.FromUnixTimeMilliseconds(Message.OriginServerTs).ToLocalTime().ToString("HH:mm")</aside>
+<div class="message-card @(IsMine ? "mine" : "")">
+    <div class="message-content">
+        <p>
+            <MessageBubbleTail IsMine=IsMine />
+            @Message.Content.Body
+        </p>
+        <aside>@DateTimeOffset.FromUnixTimeMilliseconds(Message.OriginServerTs).ToLocalTime().ToString("HH:mm")</aside>
+    </div>
+    <button class="options-btn icon-btn" @onclick=ToggleOptions><MoreIcon /></button>
 </div>
 
 @code {
-    [Parameter] public required MatrixEvent<MatrixMessage> Message { get; set; }
+    [Parameter] public EventCallback<Message> OnOptionsClicked { get; set; }
+    [Parameter] public required Message Message { get; set; }
     [Parameter] public bool IsMine { get; set; }
+
+    bool showMessageOptions = false;
+
+    void ToggleOptions()
+    {
+        //showMessageOptions = !showMessageOptions;
+        OnOptionsClicked.InvokeAsync(Message);
+    }
+
+    void ViewOriginal()
+    {
+        Console.WriteLine("View Original clicked");
+    }
+
+    void Pin()
+    {
+        Console.WriteLine("Pin clicked");
+    }
+
+    void Copy()
+    {
+        Console.WriteLine("Copy clicked");
+    }
+
+    void SelectAndCopy()
+    {
+        Console.WriteLine("Select and Copy clicked");
+    }
+
+    void Reply()
+    {
+        Console.WriteLine("Reply clicked");
+    }
 }
