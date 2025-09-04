@@ -24,6 +24,10 @@
   flex-direction: column;
   gap: 8px;
   overflow-y: auto;
+  visibility: hidden;
+}
+.message-list.show {
+  visibility: visible;
 }
 
 .message-container {

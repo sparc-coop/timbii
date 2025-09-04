@@ -22,7 +22,7 @@
 </TopBar>
 
 <main>
-    <div class="message-list">
+    <div class="message-list @(showMessages ? "show" : "")">
         @foreach (var msg in Messages)
         {
             <div class="message-container @(IsUserMessage(msg.Sender) ? "my-message" : "")">
@@ -42,6 +42,7 @@
     private MatrixRoom? Room { get; set; }
 
     bool messageSent = false;
+    bool showMessages = false;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -49,6 +50,15 @@
         {
             Room = await Chats.GetRoomSummaryAsync(RoomId);
             await GetMessagesAsync();
+            StateHasChanged();
+
+            if (Messages.Count > 0)
+            {
+                if (!messageSent)
+                {
+                    await Js.InvokeVoidAsync("scrollToLastMessage", DotNetObjectReference.Create(this), false);
+                }
+            }
         }
     }
 
@@ -56,8 +66,19 @@
     {
         if (Messages.Count > 0)
         {
-            await Js.InvokeVoidAsync("scrollToLastMessage");
+            if (messageSent) {
+                await Js.InvokeVoidAsync("scrollToLastMessage", DotNetObjectReference.Create(this), true);
+            } else
+            {
+                await Js.InvokeVoidAsync("scrollToLastMessage", DotNetObjectReference.Create(this), false);
+            }
         }
+    }
+
+    [JSInvokable("ShowMessages")] 
+    public void ShowMessages()
+    {
+        showMessages = true;
     }
 
     private async Task GetMessagesAsync()

@@ -31,7 +31,7 @@ function handleEnter(e) {
     }
 }
 
-function scrollToLastMessage() {
+function scrollToLastMessage(ref, smoothScroll) {
     //var elem = document.querySelector(".message-container:last-of-type");
     //if (elem != null) {
     //    //last.scrollTop({ behavior: "smooth", block: "end", inline: "nearest" });
@@ -42,6 +42,11 @@ function scrollToLastMessage() {
 
     var last = document.querySelector(".message-container:last-of-type");
     if (last != null) {
-        last.scrollIntoView({ behavior: "instant", block: "end", inline: "nearest" });
+        if (smoothScroll) {
+            last.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+        } else {
+            last.scrollIntoView({ behavior: "instant", block: "end", inline: "nearest" });
+            ref.invokeMethodAsync("ShowMessages");
+        }
     }
 }

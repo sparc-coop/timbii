@@ -24,6 +24,11 @@ main {
     flex-direction: column;
     gap: 8px;
     overflow-y: auto;
+    visibility: hidden;
+
+    &.show {
+        visibility: visible;
+    }
 }
 
 .message-container {
