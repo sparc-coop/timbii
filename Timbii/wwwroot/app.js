@@ -50,3 +50,19 @@ function scrollToLastMessage(ref, smoothScroll) {
         }
     }
 }
+
+function copyToClipboard(msgId) {
+    var id = msgId + "-text";
+    var html = document.getElementById(id).innerHTML;
+    console.log('copying', html);
+    var text = html.toString().replace(/<!--!-->/g, '') // get rid of blazor debug comments
+    navigator.clipboard.writeText(text);
+}
+
+//if (ChildContent != null) {
+//    await Js.InvokeAsync < string > ("copyToClipboard", CodeRef);
+//    isCopied = true;
+//    StateHasChanged();
+//    await Task.Delay(3000);
+//    isCopied = false;
+//}

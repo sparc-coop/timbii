@@ -4,13 +4,17 @@
         <li @onclick='() => OnPin.InvokeAsync()'>Pin this message</li>
         <li @onclick='() => OnCopy.InvokeAsync()'>Copy</li>
         <li @onclick='() => OnSelectAndCopy.InvokeAsync()'>Select & copy text</li>
-        <li @onclick='() => OnReply.InvokeAsync()'>Reply</li>
+        @if (!IsMine)
+        {
+            <li @onclick='() => OnReply.InvokeAsync()'>Reply</li>
+        }
     </ul>
 </div>
 <div class="modal-overlay" @onclick='() => OnClose.InvokeAsync()'></div>
 
 @code {
     [Parameter] public Message Message { get; set; }
+    [Parameter] public bool IsMine { get; set; }
     [Parameter] public EventCallback<Message> OnClose { get; set; }
     [Parameter] public EventCallback OnViewOriginal { get; set; }
     [Parameter] public EventCallback OnPin { get; set; }

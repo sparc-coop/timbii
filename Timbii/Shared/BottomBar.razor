@@ -4,16 +4,19 @@
     @if (Styles.Contains("footer-menu"))
     {
         <NavLink class="nav-link friends-btn" href="/friends" ActiveClass="active" Match="NavLinkMatch.Prefix">
-            <FriendsIcon Color="var(--egg-50)" />
+            <FriendsIcon IsMenu=true />
             <span>Friends</span>
         </NavLink>
-
         <NavLink class="nav-link chats-btn" href="/chats" ActiveClass="active" Match="NavLinkMatch.Prefix">
-            <ChatsIcon Color="var(--egg-50)" />
+            <ChatsIcon IsMenu=true />
             <span>Chats</span>
         </NavLink>
+        <NavLink class="nav-link translator-btn" href="/translator" ActiveClass="active" Match="NavLinkMatch.Prefix">
+            <SpeakIcon IsMenu=true />
+            <span>Translator</span>
+        </NavLink>
         <NavLink class="nav-link settings-btn" href="/settings" ActiveClass="active" Match="NavLinkMatch.Prefix">
-            <MoreSettingsIcon Color="var(--egg-50)" />
+            <MoreSettingsIcon ISMenu="true" />
             <span>More</span>
         </NavLink>
     }

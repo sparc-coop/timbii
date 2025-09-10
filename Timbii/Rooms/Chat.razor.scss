@@ -62,7 +62,7 @@ main {
             width: fit-content;
         }
 
-        p {
+        .message-bubble {
             width: fit-content;
             max-width: 100%;
             padding: 16px;
@@ -104,7 +104,7 @@ main {
                 gap: 8px;
             }
 
-            p {
+            .message-bubble {
                 border-radius: 24px 0 24px 24px;
                 background: var(--bubble-user-background);
                 color: var(--bubble-text-inverted);
@@ -120,6 +120,32 @@ main {
     }
 }
 
+.icon-btn {
+    ::deep svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.message-copied {
+    padding: 16px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    background: var(--surface-secondary);
+    color: var(--text-secondary);
+    font-family: Halcom;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.4rem; /* 140% */
+    animation: fadeOut 2s ease-in-out;
+    animation-delay: 1000ms;
+    z-index: 1000;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -127,5 +153,15 @@ main {
 
     to {
         opacity: 0.6;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
     }
 }

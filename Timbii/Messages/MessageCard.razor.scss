@@ -1,7 +1,7 @@
 .message-card {
     position: relative;
 
-    p {
+    .message-bubble {
         ::deep .bubble-tail {
             width: 8px;
             height: 21px;

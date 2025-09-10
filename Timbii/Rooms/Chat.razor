@@ -14,6 +14,11 @@
         </div>
     </div>
     <div class="right chat-actions">
+        @if (!isVoiceMode)
+        {
+            <button class="live-btn icon-btn" @onclick=ToggleLiveMode><LiveIcon IsActive=isLiveMode /></button>
+        }
+
         <SparcAura>
             <Presence Avatar="context" />
         </SparcAura>
@@ -25,18 +30,25 @@
     <div class="message-list @(showMessages ? "show" : "")">
         @foreach (var msg in Messages)
         {
-            <div class="message-container @(IsUserMessage(msg.Sender) ? "my-message" : "")">
+            <div id="@msg.Id" class="message-container @(IsUserMessage(msg.Sender) ? "my-message" : "")">
                 <MessageCard Message=@msg IsMine=IsUserMessage(msg.Sender) OnOptionsClicked=ToggleOptions />
             </div>
         }
     </div>
 </main>
 
-<ChatBar OnSendMessage=SendMessage MessageSent=messageSent />
+<ChatBar IsLiveMode=isLiveMode OnVoiceMode=ToggleVoiceMode OnSendMessage=SendMessage MessageSent=messageSent IsReplying=isReplying ReplyMessage=ReplyMessage OnCancelReply=CancelReply />
 
 @if (showMessageOptions && (ActiveMessage != null))
 {
-    <MessageOptions Message=ActiveMessage OnClose=ToggleOptions OnViewOriginal=ViewOriginal OnPin=Pin OnCopy=Copy OnSelectAndCopy=SelectAndCopy OnReply=Reply />
+    <MessageOptions Message=ActiveMessage IsMine=IsUserMessage(ActiveMessage.Sender) OnClose=ToggleOptions OnViewOriginal=ViewOriginal OnPin=Pin OnCopy=Copy OnSelectAndCopy=SelectAndCopy OnReply=Reply />
+}
+
+@if (isCopied)
+{
+    <div class="message-copied">
+        <p>copied!</p>
+    </div>
 }
 
 @code {
@@ -46,10 +58,16 @@
     private List<Message> Messages = [];
     private MatrixRoom? Room { get; set; }
 
+    Message ActiveMessage;
+    Message ReplyMessage;
+
     bool messageSent = false;
     bool showMessages = false;
     bool showMessageOptions = false;
-    Message ActiveMessage;
+    bool isLiveMode = false;
+    bool isVoiceMode = false;
+    bool isCopied = false;
+    bool isReplying = false;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -109,6 +127,8 @@
             await GetMessagesAsync();
             messageSent = true;
         }
+
+        isReplying = false;
     }
 
     private bool IsUserMessage(string userId)
@@ -145,9 +165,17 @@
         Console.WriteLine("Pin clicked");
     }
 
-    void Copy()
+    async Task Copy()
     {
         Console.WriteLine("Copy clicked");
+        if (ActiveMessage != null)
+        {
+            showMessageOptions = false;
+            await Js.InvokeAsync<string> ("copyToClipboard", ActiveMessage.Id);
+            isCopied = true;
+            await Task.Delay(3000);
+            isCopied = false;
+        }
     }
 
     void SelectAndCopy()
@@ -158,5 +186,26 @@
     void Reply()
     {
         Console.WriteLine("Reply clicked");
+        showMessageOptions = false;
+        isReplying = true;
+        ReplyMessage = ActiveMessage;
+    }
+
+    void CancelReply()
+    {
+        isReplying = false;
+        ReplyMessage = null;
+    }
+
+    void ToggleLiveMode()
+    {
+        isLiveMode = !isLiveMode;
+    }
+
+    void ToggleVoiceMode()
+    {
+        isVoiceMode = !isVoiceMode;
+        isLiveMode = false;
+        StateHasChanged();
     }
 }

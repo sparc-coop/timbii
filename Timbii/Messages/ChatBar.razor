@@ -1,13 +1,9 @@
 ﻿<footer class="chat-bar">
     <div class="left-btns">
         <button class="attach-btn icon-btn" @onclick=OpenUpload><FileUploadIcon /></button>
-        @if (!voiceMode)
-        {
-            <button class="live-btn icon-btn" @onclick=ToggleLiveMode><LiveIcon IsActive=liveMode /></button>
-        }
     </div>
     <form id="chat-form" @onsubmit=InitiateMessage>
-        @if (!liveMode)
+        @if (!IsLiveMode)
         {
             <div class="chat-input">
                 @if (!voiceMode)
@@ -31,14 +27,25 @@
                 <svg class="live-background" width="91" height="29" viewBox="0 0 91 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M45.3418 0.284668C61.5903 0.284668 75.6492 9.65184 82.418 23.2798C83.8962 26.2559 86.7294 28.45 90.0195 28.604H0.664062C3.95417 28.45 6.78744 26.2559 8.26562 23.2798C15.0344 9.65184 29.0933 0.284669 45.3418 0.284668Z" fill="#F7F6EF" />
                 </svg>
-                <div id="live-indicator" class="live-indicator @(isRecording ? "recording" : "") @(liveTextMode ? "disabled" : "")"><STTIcon IsLive=liveMode IsRecording=isRecording /></div>
+                <div id="live-indicator" class="live-indicator @(isRecording ? "recording" : "") @(liveTextMode ? "disabled" : "")"><STTIcon IsLive=IsLiveMode IsRecording=isRecording /></div>
             </div>
         }
     </form>
-    @if (liveMode)
+    @if (IsLiveMode)
     {
         <div class="right-btns">
             <button id="textinput-btn" class="textinput-btn icon-btn @(liveTextMode ? "active" : "")" disabled="@(isRecording ? true : false)" @onclick=ToggleLiveTextMode><TextInputIcon IsActive=@liveTextMode /></button>
+        </div>
+    }
+
+    @if (IsReplying && ReplyMessage != null)
+    {
+        <div class="message-reply">
+            <div>
+                <h5>Replying to <strong>@ReplyMessage.Sender</strong> | </h5>
+                <span>@ReplyMessage.Content.Body.Substring(0, ReplyMessage.Content.Body.Length >= 20 ? 20 : ReplyMessage.Content.Body.Length)...</span>
+            </div>
+            <button class="close-reply icon-btn" @onclick='() => OnCancelReply.InvokeAsync()'><XCircledIcon /></button>
         </div>
     }
 </footer>
@@ -86,8 +93,13 @@
 </script>
 
 @code {
+    [Parameter] public EventCallback OnVoiceMode { get; set; }
     [Parameter] public EventCallback<string> OnSendMessage { get; set; }
-    [Parameter] public bool MessageSent { get; set; } = false;
+    [Parameter] public EventCallback OnCancelReply { get; set; }
+    [Parameter] public bool MessageSent { get; set; }
+    [Parameter] public bool IsLiveMode { get; set; }
+    [Parameter] public bool IsReplying { get; set; }
+    [Parameter] public Message? ReplyMessage { get; set; }
 
     string? Text;
     string? Transcription;
@@ -95,7 +107,7 @@
     ElementReference TextArea;
     bool textMode = true;
     bool voiceMode = false;
-    bool liveMode = false;
+    //bool liveMode = false;
     bool isRecording = false;
     bool liveTextMode = false;
     bool showUpload = false;
@@ -105,6 +117,12 @@
         if (MessageSent)
         {
             await ResetInput();
+        }
+
+        if (IsLiveMode)
+        {
+            textMode = false;
+            voiceMode = false;
         }
     }
 
@@ -183,21 +201,15 @@
     {
         textMode = !textMode;
         voiceMode = false;
-        liveMode = false;
+        IsLiveMode = false;
     }
 
     void ToggleVoiceMode()
     {
         voiceMode = !voiceMode;
         textMode = false;
-        liveMode = false;
-    }
-
-    void ToggleLiveMode()
-    {
-        liveMode = !liveMode;
-        textMode = false;
-        voiceMode = false;
+        IsLiveMode = false;
+        OnVoiceMode.InvokeAsync();
     }
 
     void ToggleLiveTextMode()
